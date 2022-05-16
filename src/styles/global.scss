@@ -1,0 +1,71 @@
+:root {
+  // Fonts
+  --ff-default-text: 'Lato', sans-serif;
+  --ff-default-title: 'Poppins', sans-serif;
+
+  --fs-default-text: 1rem;
+  --fs-default-title: 2rem;
+  --fs-default-subtitle: 1.5rem;
+  --fs-default-decoration: 0.8rem;
+
+  --fw-bold: 700;
+  --fw-black: 900;
+  --fw-regular: 400;
+  --fw-semibold: 600;
+
+  // Colors
+  --green-50: #9BF2EA;
+  --green-200: #41BFB3;
+  --green-300: #2A8C82;
+  --green-600: #275950;
+
+  --dark: #14140F;
+  --shape: #f2f2f2;
+  --light: #ffffff;
+
+  //Other
+  --mg-default: 2rem;
+  --pd-default: 1rem;
+  --br-default: 0.25rem;
+  --bs-default: 3px 3px 8px rgba(0,0,0,0.2);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+
+  box-sizing: border-box;
+}
+
+html {
+  font-size: calc(60% + 0.8vmin);
+}
+
+body {
+  background-color: var(--shape);
+}
+
+h1, h2, h3, h4, h5, h6, input, select, textarea, a, li, button{
+  font-family: var(--ff-default-title);
+}
+
+p, span {
+  font-family: var(--ff-default-text);
+}
+
+button {
+  cursor: pointer;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.container {
+  max-width: 1440px;
+  width: 100%;
+
+  margin: 0 auto;
+  padding: 0 2rem;
+}
