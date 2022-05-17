@@ -4,5 +4,5 @@ export interface IContentButtonProps
   extends ButtonHTMLAttributes<HTMLButtonElement> {
   title: string;
   icon?: ReactNode;
-  color: "primary" | "light";
+  color?: "primary" | "light";
 }
