@@ -8,6 +8,13 @@
     padding: var(--pd-default);
     border-radius: var(--br-default);
 
+    button {
+        max-width: 220px;
+        width: 100%;
+    }
+}
+
+.content {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -20,15 +27,13 @@
         margin-bottom: 1rem;
     }
 
-    & > div:nth-child(1), div:nth-child(2), div:nth-child(3) {
-        margin-bottom: var(--mg-default);
-    }
-
-    button {
-        max-width: 220px;
-        width: 100%;
+    & > div:nth-child(1),
+        div:nth-child(2),
+        div:nth-child(3) {
+            margin-bottom: var(--mg-default);
     }
 }
+
 .accessButton {
     display: flex;
     align-items: center;
@@ -49,7 +54,15 @@
 }
 
 .access {
-    margin-bottom: 0.5rem;
-
     font-size: var(--fs-default-decoration);
+
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+
+    width: 100%;
+
+    & > button {
+        margin-top: 0.5rem;
+    }
 }
