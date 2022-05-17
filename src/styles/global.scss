@@ -6,7 +6,7 @@
   --fs-default-text: 1rem;
   --fs-default-title: 2rem;
   --fs-default-subtitle: 1.5rem;
-  --fs-default-decoration: 0.8rem;
+  --fs-default-decoration: 0.7rem;
 
   --fw-bold: 700;
   --fw-black: 900;
@@ -27,7 +27,7 @@
   --mg-default: 2rem;
   --pd-default: 1rem;
   --br-default: 0.25rem;
-  --bs-default: 3px 3px 8px rgba(0,0,0,0.2);
+  --bs-default: 1px 1px 5px rgba(0,0,0,0.1);
 }
 
 * {
@@ -45,7 +45,7 @@ body {
   background-color: var(--shape);
 }
 
-h1, h2, h3, h4, h5, h6, input, select, textarea, a, li, button{
+h1, h2, h3, h4, h5, h6, input, select, textarea, a, li, button, label{
   font-family: var(--ff-default-title);
 }
 
@@ -68,4 +68,8 @@ a {
 
   margin: 0 auto;
   padding: 0 2rem;
+}
+
+.contentFull {
+  height: calc(100vh - 7rem);
 }
