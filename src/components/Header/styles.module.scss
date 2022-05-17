@@ -33,3 +33,33 @@
     }
   }
 }
+
+.infoUser {
+  margin-left: auto;
+
+  display: flex;
+  align-items: center;
+
+  color: var(--shape);
+
+  span {
+    margin-right: 1rem;
+  }
+}
+
+.avatarProfile {
+  width: 48px;
+  height: 48px;
+
+  border-radius: 48px;
+
+  background-color: var(--shape);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  img {
+    border-radius: 48px;
+  }
+}
