@@ -1,0 +1,51 @@
+.container {
+    height: calc(100vh - 7rem);
+}
+
+.hero {
+    height: 100%;
+
+    display: flex;
+    justify-content: space-between;
+
+    & > div {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        max-width: 50%;
+        width: 100%;
+    }
+
+    @media (max-width: 1080px) {
+        padding: 0 2rem;
+    }
+
+    @media (max-width: 767px) {
+        & > div:first-child {
+            max-width: 100%;
+            
+            text-align: center;
+        }
+
+        & > div:last-child  {
+            display: none;
+        }
+    }
+}
+
+.infoGroup {
+    max-width: 560px;
+    width: 100%;
+
+    & > h1 {
+        margin: 0.8rem 0;
+
+        font-weight: var(--fw-black);
+        font-size: 2rem;
+    }
+
+    & > button {
+        margin-top: 0.8rem;
+    }
+}
