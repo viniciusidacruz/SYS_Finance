@@ -1,17 +1,25 @@
-.content {
+.primary, .light {
   height: 3rem;
 
   padding: 0 2rem;
+  font-size: 1rem;
 
   border-radius: var(--br-default);
   border: none;
 
-  background-color: var(--green-300);
-  color: var(--shape);
-
   transition: filter 0.2s;
   
   &:hover {
-    filter: brightness(1.4);
+    filter: brightness(0.8);
   }
+}
+
+.primary {
+  background-color: var(--green-300);
+  color: var(--shape);
+}
+
+.light {
+  background-color: var(--shape);
+  color: var(--dark);
 }
