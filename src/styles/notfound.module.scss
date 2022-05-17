@@ -1,0 +1,17 @@
+.content {
+    height: calc(100vh - 7rem);
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+
+    & > div:last-child {
+        text-align: center;
+
+        button {
+            margin-top: 1rem;
+        }
+    }
+}
