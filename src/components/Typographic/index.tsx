@@ -1,31 +1,25 @@
 import React, { Fragment } from "react";
 
-import { IColorProps } from "./types";
+import { IContentProps } from "./types";
 
 import styles from "./styles.module.scss";
 
 export function TypographicComponent({
   title,
-  p,
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6,
+  variant,
   primary,
-}: IColorProps) {
+}: IContentProps) {
   const color = primary ? styles.primary : styles.dark;
 
   return (
     <Fragment>
-      {p && <p className={color}>{title}</p>}
-      {h1 && <h1 className={color}>{title}</h1>}
-      {h2 && <h2 className={color}>{title}</h2>}
-      {h3 && <h3 className={color}>{title}</h3>}
-      {h4 && <h4 className={color}>{title}</h4>}
-      {h5 && <h5 className={color}>{title}</h5>}
-      {h6 && <h6 className={color}>{title}</h6>}
+      {variant === "p" && <p className={color}>{title}</p>}
+      {variant === "h1" && <h1 className={color}>{title}</h1>}
+      {variant === "h2" && <h2 className={color}>{title}</h2>}
+      {variant === "h3" && <h3 className={color}>{title}</h3>}
+      {variant === "h4" && <h4 className={color}>{title}</h4>}
+      {variant === "h5" && <h5 className={color}>{title}</h5>}
+      {variant === "h6" && <h6 className={color}>{title}</h6>}
     </Fragment>
   );
 }

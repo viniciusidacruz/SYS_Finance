@@ -1,11 +1,5 @@
-export interface IColorProps {
-  p?: boolean;
-  h1?: boolean;
-  h2?: boolean;
-  h3?: boolean;
-  h4?: boolean;
-  h5?: boolean;
-  h6?: boolean;
+export interface IContentProps {
+  variant: "p" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
   title: string;
   primary?: boolean;
 }
