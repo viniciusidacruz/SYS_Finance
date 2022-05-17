@@ -20,7 +20,7 @@ const Home: NextPage = () => {
         <title>SYS Finance | Developed by Vinicius Italo</title>
       </Head>
 
-      <main className={styles.container}>
+      <main className="contentFull container">
         <section className={styles.hero}>
           <div>
             <div className={styles.infoGroup}>
@@ -44,6 +44,7 @@ Lorem Ipsum has been the industry's standard dummy text ever since the
               />
             </div>
           </div>
+
           <div>
             <Image
               src={hero}
