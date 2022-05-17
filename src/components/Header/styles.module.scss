@@ -41,15 +41,13 @@
   align-items: center;
 
   color: var(--shape);
-
-  span {
-    margin-right: 1rem;
-  }
 }
 
 .avatarProfile {
   width: 48px;
   height: 48px;
+
+  margin: 0 1rem;
 
   border-radius: 48px;
 
@@ -62,4 +60,8 @@
   img {
     border-radius: 48px;
   }
+}
+
+.signOut {
+  cursor: pointer;
 }
