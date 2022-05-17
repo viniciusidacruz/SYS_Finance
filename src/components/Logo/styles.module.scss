@@ -1,0 +1,13 @@
+.container {
+    display: flex;
+    align-items: center;
+
+    span {
+        font-size: 2rem;
+        font-weight: var(--fw-bold);
+        letter-spacing: 2px;
+        text-transform: uppercase;
+
+        color: var(--shape);
+    }
+}
