@@ -1,0 +1,42 @@
+.content {
+  display: flex;
+  justify-content: space-between;
+
+  min-height: calc(100vh - 9rem);
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
+}
+
+.section {
+  width: 68%;
+
+  background-color: var(--light);
+  box-shadow: var(--bs-default);
+
+  border-radius: var(--br-default);
+
+  padding: 1rem;
+
+  table {
+    margin-top: 2rem;
+  }
+
+  @media (max-width: 768px) {
+    width: 100%;
+
+    margin-top: var(--mg-default);
+  }
+}
+
+.headerTable {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  & > div {
+    max-width: 50%;
+    width: 100%;
+  }
+}
