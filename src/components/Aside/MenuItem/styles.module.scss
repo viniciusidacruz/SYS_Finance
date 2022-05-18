@@ -1,0 +1,21 @@
+.default,
+.active {
+  font-size: 0.8rem;
+  font-weight: var(--fw-regular);
+
+  margin-bottom: 0.5rem;
+
+  cursor: pointer;
+
+  &:hover {
+    color: var(--green-200);
+  }
+}
+
+.default {
+  color: var(--grey-300);
+}
+
+.active {
+  color: var(--green-200);
+}
