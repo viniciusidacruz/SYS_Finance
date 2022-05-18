@@ -16,7 +16,7 @@ export function LoginComponent() {
   const handleSubmitForm = (event: FormEvent) => {
     event.preventDefault();
 
-    router.push(`/graphic?isAdmin=${isAdmin}`);
+    router.push(`/dashboard/graphic?isAdmin=${isAdmin}`);
   };
 
   return (
