@@ -1,0 +1,31 @@
+.aside {
+  width: 30%;
+
+  background-color: var(--light);
+
+  padding: 1rem;
+  border-radius: var(--br-default);
+
+  & > div {
+    h4 {
+      color: var(--grey-600);
+
+      margin-bottom: 1rem;
+    }
+  }
+
+  & > div:first-child {
+    margin-bottom: var(--mg-default);
+  }
+
+  ul {
+    list-style: none;
+  }
+
+  @media (max-width: 768px) {
+    width: 100%;
+
+    display: flex;
+    justify-content: space-around;
+  }
+}
