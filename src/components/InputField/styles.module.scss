@@ -28,6 +28,10 @@
         &:focus {
             border-bottom: 2px solid var(--green-200);
         }
+
+        &::placeholder {
+          font-size: var(--fs-default-decoration);
+        }
     }
 
     & > label {
