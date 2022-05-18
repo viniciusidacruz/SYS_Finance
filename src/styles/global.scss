@@ -14,7 +14,7 @@
   --fw-semibold: 600;
 
   // Colors
-  --green-50: #9BF2EA;
+  --green-50: #e2faf8;
   --green-200: #41BFB3;
   --green-300: #2A8C82;
   --green-600: #275950;
@@ -23,6 +23,12 @@
   --shape: #f2f2f2;
   --light: #ffffff;
 
+  --grey-600: #4D4D4D;
+  --grey-300: #A6A6A6;
+  --grey-200: #BFBFBF;
+  --grey-50: #F2F2F2;
+
+  
   //Other
   --mg-default: 2rem;
   --pd-default: 1rem;
@@ -45,7 +51,7 @@ body {
   background-color: var(--shape);
 }
 
-h1, h2, h3, h4, h5, h6, input, select, textarea, a, li, button, label{
+h1, h2, h3, h4, h5, h6, input, select, textarea, a, li, button, label, th, td{
   font-family: var(--ff-default-title);
 }
 
@@ -71,5 +77,5 @@ a {
 }
 
 .contentFull {
-  height: calc(100vh - 7rem);
+  height: calc(100vh - 9rem);
 }
