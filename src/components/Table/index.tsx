@@ -3,12 +3,16 @@ import Image from "next/image";
 
 import { LoadingComponent } from "components/Loading";
 
+import { useModal } from "hooks/useModal";
+
 import edit from "assets/svg/edit.svg";
 import trash from "assets/svg/trash.svg";
 
 import styles from "./styles.module.scss";
 
 export function TableComponent() {
+  const { handleOpenDelete, handleOpenEdit } = useModal();
+
   const resultTable = true;
 
   return (
@@ -33,14 +37,14 @@ export function TableComponent() {
               <td data-label="Criado em">01 de Jan, 2022</td>
               <td data-label="Ação">
                 <div className={styles.buttons}>
-                  <button>
+                  <button onClick={() => handleOpenEdit()}>
                     <Image
                       src={edit}
                       alt="Icone representando uma folha sendo escrita pelo um lapis"
                     />
                   </button>
 
-                  <button>
+                  <button onClick={() => handleOpenDelete()}>
                     <Image
                       src={trash}
                       alt="Icone representando uma cesta de lixo"
