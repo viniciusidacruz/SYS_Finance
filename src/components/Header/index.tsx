@@ -3,22 +3,43 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import { useSession, signOut } from "next-auth/react";
 
+import { useAuth } from "hooks/useAuth";
+
 import { LogoComponent } from "../Logo";
 import { ButtonComponent } from "../Button";
 
-import { dataNavigation } from "./data";
 import close from "assets/svg/logout.svg";
 
+import { dataNavigation } from "./data";
 import styles from "./styles.module.scss";
 
 export function HeaderComponent() {
   const router = useRouter();
   const session = useSession();
+  const { user, logout } = useAuth();
 
-  const isAuthenticated = session.data?.user;
-  const haveAvatarProfile = isAuthenticated?.image;
+  const isAuthenticated = session.data?.user || user?.uid;
+  const isAuthWithNextAuth = session.data?.user;
+  const isAuthWithFirebase = user?.email;
+  const haveAvatarProfile = isAuthWithNextAuth?.image;
 
-  const redirectForDashboard = () => {};
+  const nameUser = () => {
+    if (isAuthWithNextAuth) {
+      return <span>{isAuthWithNextAuth.name}</span>;
+    } else if (isAuthWithFirebase) {
+      return <span>{isAuthWithFirebase}</span>;
+    } else {
+      return null;
+    }
+  };
+
+  const loggout = () => {
+    if (isAuthWithNextAuth) {
+      signOut();
+    } else {
+      logout();
+    }
+  };
 
   return (
     <header className={styles.header}>
@@ -37,7 +58,7 @@ export function HeaderComponent() {
 
         {isAuthenticated ? (
           <div className={styles.infoUser}>
-            <span>{isAuthenticated.name}</span>
+            <span>{nameUser()}</span>
 
             <div className={styles.avatarProfile}>
               {haveAvatarProfile && (
@@ -50,7 +71,7 @@ export function HeaderComponent() {
               )}
             </div>
 
-            <span className={styles.signOut} onClick={() => signOut()}>
+            <span className={styles.signOut} onClick={() => loggout()}>
               <Image src={close} alt="Icone em formato de X para fechar" />
             </span>
           </div>
