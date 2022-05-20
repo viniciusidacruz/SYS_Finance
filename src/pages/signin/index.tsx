@@ -1,8 +1,10 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { Fragment, useEffect } from "react";
 import Head from "next/head";
 import Image from "next/image";
-import { useRouter } from "next/router";
-import { useSession } from "next-auth/react";
+import { parseCookies } from "nookies";
+import { GetServerSideProps } from "next";
+import { getSession } from "next-auth/react";
 
 import { LoginComponent } from "components/Forms/Login";
 
@@ -11,17 +13,6 @@ import login from "assets/svg/login.svg";
 import styles from "./styles.module.scss";
 
 export default function SignIn() {
-  const router = useRouter();
-  const session = useSession();
-
-  const isAuthenticated = session.data?.user;
-
-  useEffect(() => {
-    if (isAuthenticated) {
-      router.replace("/dashboard/graphic");
-    }
-  }, [session]);
-
   return (
     <Fragment>
       <Head>
@@ -47,3 +38,23 @@ export default function SignIn() {
     </Fragment>
   );
 }
+
+export const getServerSideProps: GetServerSideProps = async (ctx) => {
+  const { ["@U_Info"]: accountUser } = parseCookies(ctx);
+  const { ["next-auth.session-token"]: tokenNext } = parseCookies(ctx);
+
+  if (accountUser || tokenNext) {
+    return {
+      redirect: {
+        destination: "/dashboard/graphic",
+        permanent: false,
+      },
+    };
+  }
+
+  return {
+    props: {
+      session: await getSession(ctx),
+    },
+  };
+};

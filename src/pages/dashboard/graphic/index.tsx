@@ -1,5 +1,7 @@
 import React, { Fragment } from "react";
 import Head from "next/head";
+import { parseCookies } from "nookies";
+import { GetServerSideProps } from "next";
 
 import { TableComponent } from "components/Table";
 import { AsideComponent } from "components/Aside";
@@ -16,8 +18,30 @@ export default function Graphic() {
       </Head>
 
       <main className="container">
-        <h1>Gráfico</h1>
+        <div className="content">
+          <AsideComponent />
+
+          <h1>Teste</h1>
+        </div>
       </main>
     </Fragment>
   );
 }
+
+export const getServerSideProps: GetServerSideProps = async (ctx) => {
+  const { ["@U_Info"]: accountUser } = parseCookies(ctx);
+  const { ["next-auth.session-token"]: tokenNext } = parseCookies(ctx);
+
+  if (!accountUser && !tokenNext) {
+    return {
+      redirect: {
+        destination: "/signin",
+        permanent: false,
+      },
+    };
+  }
+
+  return {
+    props: {},
+  };
+};
