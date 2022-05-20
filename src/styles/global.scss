@@ -6,7 +6,7 @@
   --fs-default-text: 1rem;
   --fs-default-title: 2rem;
   --fs-default-subtitle: 1.5rem;
-  --fs-default-decoration: 0.7rem;
+  --fs-default-decoration: 0.9rem;
 
   --fw-bold: 700;
   --fw-black: 900;
@@ -74,6 +74,17 @@ a {
 
   margin: 0 auto;
   padding: 0 2rem;
+}
+
+.content {
+  display: flex;
+  justify-content: space-between;
+
+  min-height: calc(100vh - 9rem);
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
 }
 
 .contentFull {
