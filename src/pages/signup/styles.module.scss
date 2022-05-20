@@ -1,0 +1,25 @@
+.content {
+    height: 100%;
+    
+    display: flex;
+    justify-content: space-between;
+
+
+    & > div {
+        display: flex;
+        align-items: center;
+
+        width: 100%;
+    }
+
+    & > div:last-child {
+        display: flex;
+        justify-content: flex-end;
+    }
+
+    @media (max-width: 768px) {
+        & > div:first-child {
+            display: none;
+        }
+    }
+}
