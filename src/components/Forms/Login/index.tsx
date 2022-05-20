@@ -1,6 +1,8 @@
 import { FormEvent, useState } from "react";
-import { useRouter } from "next/router";
+import Link from "next/link";
 import { signIn } from "next-auth/react";
+
+import { useAuth } from "hooks/useAuth";
 
 import { ButtonComponent } from "components/Button";
 import { InputFieldComponent } from "components/InputField";
@@ -9,14 +11,15 @@ import { TypographicComponent } from "components/Typographic";
 import styles from "./styles.module.scss";
 
 export function LoginComponent() {
-  const [isAdmin, setIsAdmin] = useState(false);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
-  const router = useRouter();
+  const { isAdmin, setIsAdmin, signIn: signInWithFirebase } = useAuth();
 
-  const handleSubmitForm = (event: FormEvent) => {
+  const handleSubmitForm = async (event: FormEvent) => {
     event.preventDefault();
 
-    router.push(`/dashboard/graphic?isAdmin=${isAdmin}`);
+    await signInWithFirebase(email, password);
   };
 
   return (
@@ -24,8 +27,25 @@ export function LoginComponent() {
       <form className={styles.content} onSubmit={handleSubmitForm}>
         <TypographicComponent title="Entrar" variant="h3" />
 
-        <InputFieldComponent htmlFor="email" label="E-mail" />
-        <InputFieldComponent htmlFor="password" label="Senha" />
+        <InputFieldComponent
+          htmlFor="email"
+          label="E-mail"
+          id="email"
+          type="email"
+          required
+          value={email}
+          onChange={(event) => setEmail(event.target.value)}
+        />
+
+        <InputFieldComponent
+          htmlFor="password"
+          label="Senha"
+          id="password"
+          type="password"
+          required
+          value={password}
+          onChange={(event) => setPassword(event.target.value)}
+        />
 
         <div className={styles.accessButton}>
           <div>
@@ -39,6 +59,10 @@ export function LoginComponent() {
           </div>
 
           <ButtonComponent title="Entrar" color="primary" type="submit" />
+        </div>
+
+        <div className={styles.redirect}>
+          <Link href="/signup">Não tem uma conta? clique aqui</Link>
         </div>
       </form>
 
