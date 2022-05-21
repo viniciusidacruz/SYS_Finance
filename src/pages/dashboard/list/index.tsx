@@ -1,9 +1,11 @@
-import React, { Fragment } from "react";
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { Fragment, useEffect, useState } from "react";
 import Head from "next/head";
 import { parseCookies } from "nookies";
 import { GetServerSideProps } from "next";
 
 import { useModal } from "hooks/useModal";
+import RequestService from "common/services/request";
 
 import { TableComponent } from "components/Table";
 import { AsideComponent } from "components/Aside";
@@ -15,7 +17,23 @@ import { DeleteModalComponent } from "components/Modals/Delete";
 import styles from "./styles.module.scss";
 
 export default function List() {
+  const [transactions, setTransactions] = useState({});
+
   const { modal } = useModal();
+
+  const services = new RequestService();
+
+  useEffect(() => {
+    const getUser = () => {
+      services.getTransactions().then((response) => {
+        setTransactions(response);
+      });
+    };
+
+    getUser();
+  }, []);
+
+  const data = transactions && Object.values(transactions);
 
   return (
     <Fragment>
@@ -33,7 +51,7 @@ export default function List() {
               <SelectComponent />
             </div>
 
-            <TableComponent />
+            <TableComponent data={data} />
           </section>
         </div>
       </main>
