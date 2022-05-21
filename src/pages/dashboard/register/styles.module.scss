@@ -1,0 +1,16 @@
+.section {
+  width: 68%;
+
+  background-color: var(--light);
+  box-shadow: var(--bs-default);
+
+  border-radius: var(--br-default);
+
+  padding: 1rem;
+
+  @media (max-width: 768px) {
+      width: 100%;
+  
+      margin-top: var(--mg-default);
+    }
+}
