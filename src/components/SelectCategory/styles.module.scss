@@ -1,0 +1,11 @@
+.container {
+  border-bottom: 1px solid var(--dark);
+  border-left: none;
+  border-right: none;
+  border-top: none;
+  outline: none;
+
+  &:focus {
+    border-bottom: 2px solid var(--green-200);
+  }
+}
