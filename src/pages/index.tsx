@@ -40,7 +40,7 @@ const Home: NextPage = () => {
               <ButtonComponent
                 title="Faça sua cotação!"
                 color="primary"
-                onClick={() => router.push("/dashboard/registerTransaction")}
+                onClick={() => router.push("/dashboard/register")}
               />
             </div>
           </div>

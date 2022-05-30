@@ -1,5 +1,5 @@
 const categories = [
-  { title: "Selecione", value: "" },
+  { title: "Selecione categoria", value: "" },
   { title: "Mercado", value: "market" },
   { title: "Shopping", value: "shopping" },
   { title: "Aluguel", value: "rent" },

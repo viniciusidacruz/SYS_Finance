@@ -1,0 +1,36 @@
+.gridPrimary {
+  display: flex;
+  justify-content: space-between;
+
+  margin: var(--mg-default) 0;
+
+  &>div:last-child {
+    width: 30%;
+  }
+
+  &>div:first-child {
+    width: 65%;
+  }
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+
+    &>div:last-child {
+      width: 100%;
+    }
+
+    &>div:first-child {
+      width: 100%;
+    }
+  }
+}
+
+.gridSecondary {
+  display: flex;
+  justify-content: space-between;
+
+  button {
+    max-width: 220px;
+    width: 100%;
+  }
+}
