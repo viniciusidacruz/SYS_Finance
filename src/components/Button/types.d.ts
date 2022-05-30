@@ -5,4 +5,5 @@ export interface IContentButtonProps
   title: string;
   icon?: ReactNode;
   color?: "primary" | "light";
+  loading?: boolean;
 }
