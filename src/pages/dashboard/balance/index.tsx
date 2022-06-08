@@ -33,8 +33,8 @@ export default function Balance() {
 }
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
-  const { ["@U_Info"]: accountUser } = parseCookies(ctx);
-  const { ["next-auth.session-token"]: tokenNext } = parseCookies(ctx);
+  const { ["@U_Info"]: accountUser, ["next-auth.session-token"]: tokenNext } =
+    parseCookies(ctx);
 
   if (!accountUser && !tokenNext) {
     return {
