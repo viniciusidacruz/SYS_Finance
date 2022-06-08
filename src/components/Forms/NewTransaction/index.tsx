@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { SyntheticEvent, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { toast } from "react-toastify";
+import { useRouter } from "next/router";
 
 import categories from "./data";
 import RequestService from "common/services/request";
@@ -10,34 +11,49 @@ import { InputFieldComponent } from "components/InputField";
 import { SelectCategoryComponent } from "components/SelectCategory";
 
 import styles from "./styles.module.scss";
+import { useBalance } from "hooks/useBalance";
 
 export function NewTransactionForm() {
   const [title, setTitle] = useState("");
-  const [value, setValue] = useState("0");
+  const [value, setValue] = useState("");
   const [category, setCategory] = useState("Selecione");
 
+  const router = useRouter();
+  const { balance } = useBalance();
   const services = new RequestService();
 
-  const newTransactions = async () => {
+  const changeCurrency = balance.replace("R$ ", "");
+  const changeDot = changeCurrency.replace(",", ".");
+  const valueBalance = Number(changeDot);
+
+  const newTransactions = async (event: SyntheticEvent) => {
+    event.preventDefault();
+
     const data = {
       title,
       value,
       id: uuidv4(),
       category,
-      date: new Date(),
+      date: new Date().getDate(),
     };
 
-    try {
-      await services.registerTransactions(data);
-    } catch (error) {
-      toast.error("Ops, tente novamente mais tarde.");
+    if (valueBalance <= 0) {
+      toast.error("Cadastre um saldo antes");
+    } else {
+      try {
+        await services.registerTransactions(data);
+
+        router.push("/dashboard/list");
+      } catch (error) {
+        toast.error("Ops, tente novamente mais tarde.");
+      }
     }
   };
 
   const validator = title === "" || value === "0" || category === "Selecione";
 
   return (
-    <form onSubmit={() => newTransactions()}>
+    <form onSubmit={newTransactions}>
       <div className={styles.gridPrimary}>
         <InputFieldComponent
           type="text"

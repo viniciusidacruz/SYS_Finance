@@ -5,6 +5,7 @@ import { parseCookies } from "nookies";
 import { GetServerSideProps } from "next";
 
 import { useModal } from "hooks/useModal";
+import { useBalance } from "hooks/useBalance";
 import RequestService from "common/services/request";
 
 import { TableComponent } from "components/Table";
@@ -20,6 +21,7 @@ export default function List() {
   const [transactions, setTransactions] = useState({});
 
   const { modal } = useModal();
+  const { balance } = useBalance();
 
   const services = new RequestService();
 
@@ -52,6 +54,11 @@ export default function List() {
             </div>
 
             <TableComponent data={data} />
+
+            <div className={styles.total}>
+              <span>Saldo: {balance}</span>
+              <span>Total: </span>
+            </div>
           </section>
         </div>
       </main>

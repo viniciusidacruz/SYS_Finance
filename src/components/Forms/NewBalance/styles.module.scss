@@ -1,0 +1,15 @@
+.gridSecondary {
+  margin-top: 2rem;
+  
+  display: flex;
+  justify-content: space-between;
+
+  div {
+    width: 50%;
+  }
+
+  button {
+    max-width: 220px;
+    width: 100%;
+  }
+}

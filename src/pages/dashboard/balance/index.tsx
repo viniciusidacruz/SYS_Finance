@@ -4,30 +4,30 @@ import { parseCookies } from "nookies";
 import { GetServerSideProps } from "next";
 
 import { AsideComponent } from "components/Aside";
+import { NewBalanceForm } from "components/Forms/NewBalance";
 import { TypographicComponent } from "components/Typographic";
-import { NewTransactionForm } from "components/Forms/NewTransaction";
 
 import styles from "./styles.module.scss";
 import { AnimationContainerRight } from "styles/Animated";
 
-export default function Register() {
+export default function Balance() {
   return (
     <Fragment>
       <Head>
-        <title>Cadastrar transação | Desenvolvido por Vinicius Italo</title>
+        <title>Cadastrar saldo | Desenvolvido por Vinicius Italo</title>
       </Head>
 
-      <main className="container">
+      <AnimationContainerRight className="container">
         <div className="content">
           <AsideComponent />
 
-          <AnimationContainerRight className={styles.section}>
-            <TypographicComponent title="Cadastrar transações" variant="h1" />
+          <section className={styles.section}>
+            <TypographicComponent title="Cadastrar saldo" variant="h1" />
 
-            <NewTransactionForm />
-          </AnimationContainerRight>
+            <NewBalanceForm />
+          </section>
         </div>
-      </main>
+      </AnimationContainerRight>
     </Fragment>
   );
 }

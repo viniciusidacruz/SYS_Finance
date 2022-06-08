@@ -10,6 +10,10 @@ import { TypographicComponent } from "components/Typographic";
 import hero from "assets/svg/hero.svg";
 
 import styles from "../styles/home.module.scss";
+import {
+  AnimationContainerLeft,
+  AnimationContainerRight,
+} from "styles/Animated";
 
 const Home: NextPage = () => {
   const router = useRouter();
@@ -22,37 +26,36 @@ const Home: NextPage = () => {
 
       <main className="contentFull container">
         <section className={styles.hero}>
-          <div>
+          <AnimationContainerLeft>
             <div className={styles.infoGroup}>
-              <TypographicComponent variant="h5" title="Teste" />
+              <TypographicComponent variant="h5" title="Vida em ordem" />
               <TypographicComponent
                 variant="h1"
-                title="What is Lorem Ipsum?"
+                title="Faça agora mesmo sua cotação!"
                 primary
               />
+
               <TypographicComponent
                 variant="p"
-                title="Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                      Lorem Ipsum has been the industry's standard dummy text ever since the 
-                      1500s, when an unknown printer took a galley of type and scrambled it to
-                      make a type specimen book"
+                title="Nada melhor que ter suas contas em ordem, a organização é a base de toda a vida então venha fazer parte desse time e deixe agora o seu mês organizado junto com suas contas."
               />
+
               <ButtonComponent
                 title="Faça sua cotação!"
                 color="primary"
                 onClick={() => router.push("/dashboard/register")}
               />
             </div>
-          </div>
+          </AnimationContainerLeft>
 
-          <div>
+          <AnimationContainerRight>
             <Image
               src={hero}
               width={550}
               height={500}
               alt="Uma imagem ilustrativa de um boneco colocando uma moeda dentro de um cofrinho em formato de porco"
             />
-          </div>
+          </AnimationContainerRight>
         </section>
       </main>
     </Fragment>

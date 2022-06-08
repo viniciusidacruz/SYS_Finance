@@ -6,10 +6,11 @@ import { TypographicComponent } from "components/Typographic";
 import { menuItems } from "./data";
 
 import styles from "./styles.module.scss";
+import { AnimationContainerLeft } from "styles/Animated";
 
 export function AsideComponent() {
   return (
-    <aside className={styles.aside}>
+    <AnimationContainerLeft className={styles.aside}>
       <div>
         <TypographicComponent title="Dashboard" variant="h4" />
 
@@ -32,6 +33,6 @@ export function AsideComponent() {
           <li onClick={() => signOut()}>Sair</li>
         </ul>
       </div>
-    </aside>
+    </AnimationContainerLeft>
   );
 }

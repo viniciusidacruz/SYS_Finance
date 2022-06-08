@@ -1,16 +1,23 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useEffect } from "react";
 import Head from "next/head";
 import { parseCookies } from "nookies";
+import { useRouter } from "next/router";
 import { GetServerSideProps } from "next";
 
-import { TableComponent } from "components/Table";
 import { AsideComponent } from "components/Aside";
-import { SearchComponent } from "components/Search";
-import { SelectComponent } from "components/Select";
 
 import styles from "./styles.module.scss";
 
 export default function Graphic() {
+  const router = useRouter();
+  const pathname = router.pathname;
+
+  useEffect(() => {
+    if (pathname) {
+      router.replace("/dashboard/register");
+    }
+  }, []);
+
   return (
     <Fragment>
       <Head>
