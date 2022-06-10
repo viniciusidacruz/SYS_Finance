@@ -17,25 +17,12 @@ class RequestService {
     }
   }
 
-  async registerBalance(value: {}) {
-    await API.patch(
-      `/balance/${process.env.NEXT_PUBLIC_BALANCE_ID}.json`,
-      value
-    );
+  async editTransaction(id: string, value: object) {
+    await API.put(`/transactions/${id}.json`, value);
   }
 
-  async getBalance() {
-    const response = await API.get(
-      `/balance/${process.env.NEXT_PUBLIC_BALANCE_ID}.json`
-    );
-
-    const { data } = response;
-
-    if (data) {
-      return data;
-    } else {
-      throw new Error("Algo deu errado, tenta novamente mais tarde!");
-    }
+  async deleteTransaction(id: string) {
+    await API.delete(`/transactions/${id}.json`);
   }
 }
 

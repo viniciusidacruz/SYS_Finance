@@ -1,23 +1,38 @@
-import { useRef, useEffect, useCallback, MouseEvent, useState } from "react";
+import {
+  useRef,
+  useState,
+  FormEvent,
+  useEffect,
+  MouseEvent,
+  useCallback,
+} from "react";
 import Image from "next/image";
-
-import { ButtonComponent } from "components/Button";
-import { TypographicComponent } from "components/Typographic";
+import { v4 as uuidv4 } from "uuid";
+import { toast } from "react-toastify";
 
 import { useModal } from "hooks/useModal";
+import RequestService from "common/services/request";
+import { useTransactions } from "hooks/useTransactions";
+
+import { ButtonComponent } from "components/Button";
+import { InputFieldComponent } from "components/InputField";
+import { TypographicComponent } from "components/Typographic";
 
 import close from "assets/svg/close.svg";
 
 import styles from "./styles.module.scss";
-import { InputFieldComponent } from "components/InputField";
+import { AnimationContainerTop } from "styles/Animated";
 
 export function EditModalComponent() {
-  const [name, setName] = useState("");
-  const [value, setValue] = useState("");
-  const [select, setSelect] = useState("");
+  const { modal, setModal, handleCloseEdit } = useModal();
+
+  const [name, setName] = useState(modal.data.data[1].title);
+  const [value, setValue] = useState(modal.data.data[1].value);
+  const [select, setSelect] = useState(modal.data.data[1].category);
 
   const modalRef = useRef<any>();
-  const { modal, setModal, handleCloseEdit } = useModal();
+  const service = new RequestService();
+  const { setEditSuccess, editSuccess } = useTransactions();
 
   const closeModal = (event: MouseEvent) => {
     if (modalRef.current === event.target) {
@@ -40,13 +55,36 @@ export function EditModalComponent() {
     return () => document.removeEventListener("keydown", keyPress);
   }, [keyPress]);
 
+  const handleEditPlan = async (event: FormEvent) => {
+    event.preventDefault();
+
+    try {
+      await service.editTransaction(modal.data.data[0], {
+        title: name,
+        value,
+        category: select,
+        id: uuidv4(),
+        date: new Date(),
+      });
+
+      toast.success("Editado com sucesso!");
+
+      setTimeout(() => {
+        setEditSuccess(!editSuccess);
+        setModal({ ...modal, edit: false });
+      }, 3000);
+    } catch (error) {
+      throw new Error("Algo deu errado ao editar a transação");
+    }
+  };
+
   return (
     <div
       className={styles.background}
       ref={modalRef}
       onClick={(event) => closeModal(event)}
     >
-      <div className={styles.wrapper}>
+      <AnimationContainerTop className={styles.wrapper}>
         <button onClick={() => handleCloseEdit()} className={styles.close}>
           <Image
             src={close}
@@ -58,7 +96,7 @@ export function EditModalComponent() {
 
         <TypographicComponent title="Editar transação" variant="h3" />
 
-        <form className={styles.form}>
+        <form className={styles.form} onSubmit={handleEditPlan}>
           <InputFieldComponent
             label="Nome da transação"
             htmlFor="name"
@@ -94,7 +132,7 @@ export function EditModalComponent() {
 
           <ButtonComponent title="Confirmar" color="primary" type="submit" />
         </form>
-      </div>
+      </AnimationContainerTop>
     </div>
   );
 }

@@ -4,11 +4,12 @@ interface ModalContextProps {
   modal: {
     edit: boolean;
     delete: boolean;
+    data: any;
   };
-  setModal: ({ edit: boolean, delete: boolean }) => void;
-  handleOpenEdit: () => void;
+  setModal: ({ edit: boolean, delete: boolean, data: object }) => void;
+  handleOpenEdit: (value: any) => void;
   handleCloseEdit: () => void;
-  handleOpenDelete: () => void;
+  handleOpenDelete: (value: any) => void;
   handleCloseDelete: () => void;
 }
 

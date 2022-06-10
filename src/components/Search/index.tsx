@@ -1,8 +1,9 @@
+import { useTransactions } from "hooks/useTransactions";
+
 import { InputFieldComponent } from "components/InputField";
-import { useState } from "react";
 
 export function SearchComponent() {
-  const [search, setSearch] = useState("");
+  const { search, setSearch } = useTransactions();
 
   return (
     <InputFieldComponent

@@ -1,13 +1,5 @@
 interface IContentProps {
-  data: Array[];
+  data: object;
 }
 
-interface IKeysProps {
-  category: string;
-  date: string;
-  id: string;
-  title: string;
-  value: string;
-}
-
-export { IContentProps, IKeysProps };
+export { IContentProps };

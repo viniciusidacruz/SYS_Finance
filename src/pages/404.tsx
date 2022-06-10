@@ -29,9 +29,9 @@ export default function NotFound() {
             variant="h1"
           />
           <ButtonComponent
-            title="Voltar para página inicial"
+            title="Voltar para página anterior"
             color="primary"
-            onClick={() => router.push("/")}
+            onClick={() => window.history.back()}
           />
         </div>
       </section>

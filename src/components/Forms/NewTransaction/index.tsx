@@ -5,13 +5,13 @@ import { useRouter } from "next/router";
 
 import categories from "./data";
 import RequestService from "common/services/request";
+import { useTransactions } from "hooks/useTransactions";
 
 import { ButtonComponent } from "components/Button";
 import { InputFieldComponent } from "components/InputField";
 import { SelectCategoryComponent } from "components/SelectCategory";
 
 import styles from "./styles.module.scss";
-import { useBalance } from "hooks/useBalance";
 
 export function NewTransactionForm() {
   const [title, setTitle] = useState("");
@@ -19,12 +19,8 @@ export function NewTransactionForm() {
   const [category, setCategory] = useState("Selecione");
 
   const router = useRouter();
-  const { balance } = useBalance();
   const services = new RequestService();
-
-  const changeCurrency = balance.replace("R$ ", "");
-  const changeDot = changeCurrency.replace(",", ".");
-  const valueBalance = Number(changeDot);
+  const { editSuccess, setEditSuccess } = useTransactions();
 
   const newTransactions = async (event: SyntheticEvent) => {
     event.preventDefault();
@@ -34,19 +30,15 @@ export function NewTransactionForm() {
       value,
       id: uuidv4(),
       category,
-      date: new Date().getDate(),
+      date: new Date(),
     };
 
-    if (valueBalance <= 0) {
-      toast.error("Cadastre um saldo antes");
-    } else {
-      try {
-        await services.registerTransactions(data);
-
-        router.push("/dashboard/list");
-      } catch (error) {
-        toast.error("Ops, tente novamente mais tarde.");
-      }
+    try {
+      await services.registerTransactions(data);
+      setEditSuccess(!editSuccess);
+      router.push("/dashboard/list");
+    } catch (error) {
+      toast.error("Ops, tente novamente mais tarde.");
     }
   };
 
@@ -73,7 +65,6 @@ export function NewTransactionForm() {
           label="Valor da transação"
           htmlFor="valueTransaction"
           id="valueTransaction"
-          mask="currency"
         />
       </div>
 

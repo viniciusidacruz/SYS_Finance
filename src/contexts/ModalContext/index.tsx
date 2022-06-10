@@ -8,12 +8,17 @@ export const ModalProvider = ({ children }: ModalProviderProps) => {
   const [modal, setModal] = useState({
     edit: false,
     delete: false,
+    data: {},
   });
 
-  const handleOpenEdit = () => setModal({ ...modal, edit: true });
+  const handleOpenEdit = (data: {}) => {
+    setModal({ ...modal, edit: true, data: { ...modal.data, data } });
+  };
   const handleCloseEdit = () => setModal({ ...modal, edit: false });
 
-  const handleOpenDelete = () => setModal({ ...modal, delete: true });
+  const handleOpenDelete = (data: {}) =>
+    setModal({ ...modal, delete: true, data: { ...modal.data, data } });
+
   const handleCloseDelete = () => setModal({ ...modal, delete: false });
 
   return (

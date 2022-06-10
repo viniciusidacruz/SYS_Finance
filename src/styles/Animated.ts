@@ -22,6 +22,18 @@ const apearFromRight = keyframes`
   }
 `;
 
+const apearFromTop = keyframes`
+  from {
+    opacity: 0;
+    transform: translateY(-100px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+`;
+
 const AnimationContainerLeft = styled.div`
   animation: ${apearFromLeft} 1s;
 `;
@@ -30,4 +42,12 @@ const AnimationContainerRight = styled.div`
   animation: ${apearFromRight} 1s;
 `;
 
-export { AnimationContainerLeft, AnimationContainerRight };
+const AnimationContainerTop = styled.div`
+  animation: ${apearFromTop} 1s;
+`;
+
+export {
+  AnimationContainerTop,
+  AnimationContainerLeft,
+  AnimationContainerRight,
+};

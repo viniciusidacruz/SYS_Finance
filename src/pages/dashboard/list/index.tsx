@@ -5,8 +5,8 @@ import { parseCookies } from "nookies";
 import { GetServerSideProps } from "next";
 
 import { useModal } from "hooks/useModal";
-import { useBalance } from "hooks/useBalance";
-import RequestService from "common/services/request";
+import { useTransactions } from "hooks/useTransactions";
+import { formatedCurrency } from "common/utils/formats";
 
 import { TableComponent } from "components/Table";
 import { AsideComponent } from "components/Aside";
@@ -16,26 +16,32 @@ import { EditModalComponent } from "components/Modals/Edit";
 import { DeleteModalComponent } from "components/Modals/Delete";
 
 import styles from "./styles.module.scss";
+import { AnimationContainerRight } from "styles/Animated";
 
 export default function List() {
-  const [transactions, setTransactions] = useState({});
-
   const { modal } = useModal();
-  const { balance } = useBalance();
-
-  const services = new RequestService();
-
-  useEffect(() => {
-    const getUser = () => {
-      services.getTransactions().then((response) => {
-        setTransactions(response);
-      });
-    };
-
-    getUser();
-  }, []);
+  const { transactions } = useTransactions();
 
   const data = transactions && Object.values(transactions);
+
+  const summary = data.reduce(
+    (acc, transaction) => {
+      if (transaction.category === "Entrada") {
+        acc.deposits += Number(transaction.value);
+        acc.total += Number(transaction.value);
+      } else {
+        acc.withdraws += Number(transaction.value);
+        acc.total -= Number(transaction.value);
+      }
+
+      return acc;
+    },
+    {
+      deposits: 0,
+      withdraws: 0,
+      total: 0,
+    }
+  );
 
   return (
     <Fragment>
@@ -47,19 +53,20 @@ export default function List() {
         <div className="content">
           <AsideComponent />
 
-          <section className={styles.section}>
+          <AnimationContainerRight className={styles.section}>
             <div className={styles.headerTable}>
               <SearchComponent />
               <SelectComponent />
             </div>
 
-            <TableComponent data={data} />
+            <TableComponent data={transactions && transactions} />
 
-            <div className={styles.total}>
-              <span>Saldo: {balance}</span>
-              <span>Total: </span>
+            <div className={styles.footerSummary}>
+              <span>Entrada: {formatedCurrency(summary.deposits)}</span>
+              <span>Saidas: {formatedCurrency(summary.withdraws)}</span>
+              <span>Total: {formatedCurrency(summary.total)}</span>
             </div>
-          </section>
+          </AnimationContainerRight>
         </div>
       </main>
 
