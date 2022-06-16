@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/router";
+import { IoMdClose } from "react-icons/io";
 import { useSession, signOut } from "next-auth/react";
 
 import { useAuth } from "hooks/useAuth";
@@ -8,12 +9,18 @@ import { useAuth } from "hooks/useAuth";
 import { LogoComponent } from "../Logo";
 import { ButtonComponent } from "../Button";
 
-import close from "assets/svg/logout.svg";
+import logoutIcon from "assets/svg/logout.svg";
+import closeX from "assets/svg/close.svg";
+import menuIcon from "assets/svg/menu.svg";
 
 import { dataNavigation } from "./data";
 import styles from "./styles.module.scss";
+import { useState } from "react";
+import { Drawer } from "./Drawer";
 
 export function HeaderComponent() {
+  const [showMenu, setShowMenu] = useState(false);
+
   const router = useRouter();
   const session = useSession();
   const { user, logout } = useAuth();
@@ -72,7 +79,7 @@ export function HeaderComponent() {
             </div>
 
             <span className={styles.signOut} onClick={() => loggout()}>
-              <Image src={close} alt="Icone em formato de X para fechar" />
+              <Image src={logoutIcon} alt="Icone em formato de X para fechar" />
             </span>
           </div>
         ) : (
@@ -82,7 +89,22 @@ export function HeaderComponent() {
             onClick={() => router.push("/signin")}
           />
         )}
+
+        <div
+          className={styles.iconMobile}
+          onClick={() => setShowMenu(!showMenu)}
+        >
+          {showMenu ? (
+            <IoMdClose color="#ffffff" size={24} />
+          ) : (
+            <Image
+              src={menuIcon}
+              alt="Icone com formato de três linha demostrando que é um hamburgue"
+            />
+          )}
+        </div>
       </nav>
+      {showMenu && <Drawer onClose={setShowMenu} />}
     </header>
   );
 }

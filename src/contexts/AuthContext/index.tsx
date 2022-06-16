@@ -75,6 +75,8 @@ export const AuthProvider = ({ children }: AuthContextProps) => {
   const logout = () => {
     signOut(auth);
     destroyCookie(null, "@U_Info");
+
+    router.push("/signin");
   };
 
   return (

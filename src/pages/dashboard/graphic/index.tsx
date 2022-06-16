@@ -6,16 +6,26 @@ import { GetServerSideProps } from "next";
 
 import { AsideComponent } from "components/Aside";
 
+import UrlParamsProps from "./types";
 import styles from "./styles.module.scss";
 
 export default function Graphic() {
   const router = useRouter();
-  const pathname = router.pathname;
+  const params = new URLSearchParams(window.location.search);
+
+  let urlParams: UrlParamsProps | undefined = undefined;
+  params.forEach((value, key) => {
+    urlParams = Object.assign({}, urlParams, {
+      [key]: value.toString(),
+    });
+  });
 
   useEffect(() => {
-    if (pathname) {
-      router.replace("/dashboard/register");
+    console.log(urlParams);
+    if (urlParams?.isAdmin === false && !urlParams) {
+      router.push("/signin");
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
