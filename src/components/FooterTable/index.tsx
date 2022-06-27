@@ -10,7 +10,7 @@ export function FooterTableComponent() {
 
   const summary = data.reduce(
     (acc, transaction) => {
-      if (transaction.category === "Entrada") {
+      if (transaction.type === "Entrada") {
         acc.deposits += Number(transaction.value);
         acc.total += Number(transaction.value);
       } else {
@@ -29,8 +29,12 @@ export function FooterTableComponent() {
 
   return (
     <div className={styles.footerSummary}>
-      <span>Entrada: {formatedCurrency(summary.deposits)}</span>
-      <span>Saidas: {formatedCurrency(summary.withdraws)}</span>
+      <span className="success">
+        Entrada: {formatedCurrency(summary.deposits)}
+      </span>
+      <span className="error">
+        Saidas: {formatedCurrency(summary.withdraws)}
+      </span>
       <span>Total: {formatedCurrency(summary.total)}</span>
     </div>
   );

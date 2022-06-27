@@ -9,9 +9,8 @@ import { useAuth } from "hooks/useAuth";
 import { LogoComponent } from "../Logo";
 import { ButtonComponent } from "../Button";
 
+import userProfile from "assets/svg/user.svg";
 import logoutIcon from "assets/svg/logout.svg";
-import closeX from "assets/svg/close.svg";
-import menuIcon from "assets/svg/menu.svg";
 
 import { dataNavigation } from "./data";
 import styles from "./styles.module.scss";
@@ -68,12 +67,19 @@ export function HeaderComponent() {
             <span>{nameUser()}</span>
 
             <div className={styles.avatarProfile}>
-              {haveAvatarProfile && (
+              {haveAvatarProfile ? (
                 <Image
                   src={haveAvatarProfile}
                   alt="Foto de perfil do usuário"
                   width={48}
                   height={48}
+                />
+              ) : (
+                <Image
+                  src={userProfile}
+                  alt="Foto de perfil do usuário"
+                  width={32}
+                  height={32}
                 />
               )}
             </div>

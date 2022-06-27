@@ -2,21 +2,24 @@ import React, { SyntheticEvent, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { toast } from "react-toastify";
 import { useRouter } from "next/router";
+import { GiWallet, GiPayMoney } from "react-icons/gi";
 
-import categories from "./data";
 import RequestService from "common/services/request";
 import { useTransactions } from "hooks/useTransactions";
 
 import { ButtonComponent } from "components/Button";
 import { InputFieldComponent } from "components/InputField";
-import { SelectCategoryComponent } from "components/SelectCategory";
+import { SelectOptionComponent } from "components/SelectOption";
 
 import styles from "./styles.module.scss";
 
 export function NewTransactionForm() {
   const [title, setTitle] = useState("");
   const [value, setValue] = useState("");
-  const [category, setCategory] = useState("Selecione");
+  const [type, setType] = useState({
+    position: 0,
+    title: "Entrada",
+  });
 
   const router = useRouter();
   const services = new RequestService();
@@ -29,7 +32,7 @@ export function NewTransactionForm() {
       title,
       value,
       id: uuidv4(),
-      category,
+      type: type.title,
       date: new Date(),
     };
 
@@ -42,7 +45,7 @@ export function NewTransactionForm() {
     }
   };
 
-  const validator = title === "" || value === "" || category === "Selecione";
+  const validator = title === "" || value === "";
 
   return (
     <form onSubmit={newTransactions}>
@@ -68,12 +71,25 @@ export function NewTransactionForm() {
         />
       </div>
 
-      <div className={styles.gridSecondary}>
-        <SelectCategoryComponent
-          options={categories}
-          handleChangeOptions={setCategory}
+      <div className={styles.groupSelects}>
+        <SelectOptionComponent
+          selected={type.position === 0}
+          title="Entrada"
+          description="Selecione essa opção caso queira efetuar um cadastro de um recebimento"
+          icon={<GiWallet size={32} />}
+          onClick={() => setType({ title: "Entrada", position: 0 })}
         />
 
+        <SelectOptionComponent
+          selected={type.position === 1}
+          title="Saida"
+          description="Selecione essa opção caso queira efetuar um pagamento"
+          icon={<GiPayMoney size={32} />}
+          onClick={() => setType({ title: "Saida", position: 1 })}
+        />
+      </div>
+
+      <div className={styles.footerForm}>
         <ButtonComponent
           title="Cadastrar"
           type="submit"

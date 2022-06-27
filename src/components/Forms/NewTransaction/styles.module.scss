@@ -25,9 +25,22 @@
   }
 }
 
-.gridSecondary {
+.groupSelects {
   display: flex;
   justify-content: space-between;
+
+  margin-bottom: 2rem;
+  
+  & > div {
+    max-width: 48%;
+    width: 100%;
+  }
+}
+
+.footerForm {
+  display: flex;
+  justify-content: center;
+  width: 100%;
 
   button {
     max-width: 220px;

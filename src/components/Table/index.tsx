@@ -20,7 +20,10 @@ export function TableComponent({ data }: IContentProps) {
   const filteredSearch = Object.entries(data).filter((val) => {
     if (search == "") {
       return val;
-    } else if (val[1].title.toLowerCase().includes(search.toLowerCase())) {
+    } else if (
+      val[1].title.toLowerCase().includes(search.toLowerCase()) ||
+      val[1].category.toLowerCase().includes(search.toLowerCase())
+    ) {
       return val;
     }
   });
@@ -33,7 +36,7 @@ export function TableComponent({ data }: IContentProps) {
             <tr>
               <th>ID</th>
               <th>Nome</th>
-              <th>Categoria</th>
+              <th>Tipo</th>
               <th>Valor</th>
               <th>Criado em</th>
               <th>Ação</th>
@@ -52,7 +55,7 @@ export function TableComponent({ data }: IContentProps) {
                   <tr key={transaction[1].id}>
                     <td data-label="ID">{id}</td>
                     <td data-label="Nome">{transaction[1].title}</td>
-                    <td data-label="Categoria">{transaction[1].category}</td>
+                    <td data-label="Tipo">{transaction[1].category}</td>
                     <td data-label="Valor" className={isNegative}>
                       {transaction[1].category === "Saida" && "- "}
                       {formatedCurrency(value)}

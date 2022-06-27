@@ -9,7 +9,7 @@ import { GetServerSideProps } from "next";
 import { useModal } from "hooks/useModal";
 import { useTransactions } from "hooks/useTransactions";
 
-import eyes from "assets/gif/eyes.gif";
+import pig from "assets/gif/pig.gif";
 
 import { TableComponent } from "components/Table";
 import { AsideComponent } from "components/Aside";
@@ -59,8 +59,8 @@ export default function List() {
                   variant="h2"
                 />
                 <Image
-                  src={eyes}
-                  alt="Um olhar olhando para os dois lados"
+                  src={pig}
+                  alt="Um porquinho recebendo dinheiro"
                   width={150}
                   height={120}
                 />
