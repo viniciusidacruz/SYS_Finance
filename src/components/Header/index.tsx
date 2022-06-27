@@ -89,20 +89,6 @@ export function HeaderComponent() {
             onClick={() => router.push("/signin")}
           />
         )}
-
-        <div
-          className={styles.iconMobile}
-          onClick={() => setShowMenu(!showMenu)}
-        >
-          {showMenu ? (
-            <IoMdClose color="#ffffff" size={24} />
-          ) : (
-            <Image
-              src={menuIcon}
-              alt="Icone com formato de três linha demostrando que é um hamburgue"
-            />
-          )}
-        </div>
       </nav>
       {showMenu && <Drawer onClose={setShowMenu} />}
     </header>

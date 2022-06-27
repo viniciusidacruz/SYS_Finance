@@ -5,6 +5,7 @@ import { GetServerSideProps } from "next";
 
 import { AsideComponent } from "components/Aside";
 import { TypographicComponent } from "components/Typographic";
+import { FooterTableComponent } from "components/FooterTable";
 import { NewTransactionForm } from "components/Forms/NewTransaction";
 
 import styles from "./styles.module.scss";
@@ -25,6 +26,8 @@ export default function Register() {
             <TypographicComponent title="Cadastrar transações" variant="h1" />
 
             <NewTransactionForm />
+
+            <FooterTableComponent />
           </AnimationContainerRight>
         </div>
       </main>

@@ -1,5 +1,6 @@
 .section {
   width: 78%;
+  height: 100%;
 
   background-color: var(--light);
   box-shadow: var(--bs-default);
@@ -15,6 +16,10 @@
     font-size: 1rem;
 
     color: var(--dark);
+  }
+
+  & > form {
+    margin-bottom: 2rem;
   }
 
   @media (max-width: 768px) {

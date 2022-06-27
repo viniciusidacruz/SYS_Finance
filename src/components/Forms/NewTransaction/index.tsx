@@ -42,7 +42,7 @@ export function NewTransactionForm() {
     }
   };
 
-  const validator = title === "" || value === "0" || category === "Selecione";
+  const validator = title === "" || value === "" || category === "Selecione";
 
   return (
     <form onSubmit={newTransactions}>
@@ -58,7 +58,7 @@ export function NewTransactionForm() {
         />
 
         <InputFieldComponent
-          type="text"
+          type="number"
           value={value}
           onChange={(event) => setValue(event.target.value)}
           required

@@ -26,10 +26,9 @@ export function AsideComponent() {
       </div>
 
       <div>
-        <TypographicComponent title="Perfil" variant="h4" />
+        <TypographicComponent title="Configurações" variant="h4" />
 
         <ul>
-          <MenuItemComponent title="Perfil" path="/dashboard/profile" />
           <li onClick={() => signOut()}>Sair</li>
         </ul>
       </div>

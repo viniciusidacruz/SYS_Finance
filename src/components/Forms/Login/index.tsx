@@ -47,19 +47,7 @@ export function LoginComponent() {
           onChange={(event) => setPassword(event.target.value)}
         />
 
-        <div className={styles.accessButton}>
-          <div>
-            <input
-              type="checkbox"
-              id="admin"
-              defaultChecked={isAdmin}
-              onChange={() => setIsAdmin(!isAdmin)}
-            />
-            <label htmlFor="admin">Administrador</label>
-          </div>
-
-          <ButtonComponent title="Entrar" color="primary" type="submit" />
-        </div>
+        <ButtonComponent title="Entrar" color="primary" type="submit" />
 
         <div className={styles.redirect}>
           <Link href="/signup">Não tem uma conta? clique aqui</Link>

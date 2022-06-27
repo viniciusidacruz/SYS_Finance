@@ -51,10 +51,6 @@
   align-items: center;
 
   color: var(--shape);
-
-  @media (max-width: 768px) {
-    display: none;
-  }
 }
 
 .avatarProfile {
@@ -78,15 +74,4 @@
 
 .signOut {
   cursor: pointer;
-}
-
-.iconMobile {
-  cursor: pointer;
-  margin-left: auto;
-  
-  display: none;
-
-  @media (max-width: 768px) {
-    display: block;
-  }
 }

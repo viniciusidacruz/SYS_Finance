@@ -20,9 +20,12 @@ export const TransactionsProvider = ({
 
   useEffect(() => {
     const getUserTransactions = () => {
-      serviceTransactions.getTransactions().then((response) => {
-        setTransactions(response);
-      });
+      serviceTransactions
+        .getTransactions()
+        .then((response) => {
+          setTransactions(response);
+        })
+        .catch(() => setTransactions([]));
     };
 
     getUserTransactions();

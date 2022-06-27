@@ -31,30 +31,10 @@
   }
 }
 
-.footerSummary {
+.container {
   width: 100%;
-  height: 3rem;
-
-  border-top: 1px solid #ccc;
-
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: space-between;
-
-  margin-top: auto;
-
-  & > span {
-    font-weight: bold;
-  }
-
-  @media (max-width: 768px) {
-    flex-direction: column;
-    align-items: flex-start;
-    height: 100%;
-
-    & > span {
-      font-size: 1.2rem;
-      margin: 1rem  0;
-    }
-  }
+  margin: 2rem 0;
 }

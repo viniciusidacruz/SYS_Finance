@@ -20,6 +20,10 @@
 
   ul {
     list-style: none;
+
+    li {
+      cursor: pointer;
+    }
   }
 
   @media (max-width: 768px) {

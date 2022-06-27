@@ -46,7 +46,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
   if (accountUser || tokenNext) {
     return {
       redirect: {
-        destination: "/dashboard/graphic",
+        destination: "/dashboard/list",
         permanent: false,
       },
     };
