@@ -1,6 +1,6 @@
 import API from "./api";
 
-class RequestService {
+class RequestTransactions {
   async registerTransactions(value: {}) {
     await API.post("/transactions.json", value);
   }
@@ -26,4 +26,4 @@ class RequestService {
   }
 }
 
-export default RequestService;
+export default RequestTransactions;

@@ -13,4 +13,10 @@ const formatedDate = (date: string) => {
   return dateFormated;
 };
 
-export { formatedCurrency, formatedDate };
+const removeCaracter = (value: string) => {
+  let newString = value.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+
+  return newString;
+};
+
+export { formatedCurrency, formatedDate, removeCaracter };

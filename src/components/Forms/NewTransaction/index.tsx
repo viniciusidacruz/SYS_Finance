@@ -4,8 +4,9 @@ import { toast } from "react-toastify";
 import { useRouter } from "next/router";
 import { GiWallet, GiPayMoney } from "react-icons/gi";
 
-import RequestService from "common/services/request";
+import { useCategories } from "hooks/useCategories";
 import { useTransactions } from "hooks/useTransactions";
+import RequestTransactions from "common/services/RequestTransaction";
 
 import { ButtonComponent } from "components/Button";
 import { InputFieldComponent } from "components/InputField";
@@ -22,7 +23,8 @@ export function NewTransactionForm() {
   });
 
   const router = useRouter();
-  const services = new RequestService();
+  const { categories } = useCategories();
+  const services = new RequestTransactions();
   const { editSuccess, setEditSuccess } = useTransactions();
 
   const newTransactions = async (event: SyntheticEvent) => {
@@ -47,6 +49,8 @@ export function NewTransactionForm() {
 
   const validator = title === "" || value === "";
 
+  console.log(categories);
+
   return (
     <form onSubmit={newTransactions}>
       <div className={styles.gridPrimary}>
@@ -58,6 +62,7 @@ export function NewTransactionForm() {
           label="Nome da transação"
           htmlFor="nameTransaction"
           id="nameTransaction"
+          placeholder="Exemplo: conta de luz..."
         />
 
         <InputFieldComponent
@@ -68,6 +73,7 @@ export function NewTransactionForm() {
           label="Valor da transação"
           htmlFor="valueTransaction"
           id="valueTransaction"
+          placeholder="Exemplo: R$50,00..."
         />
       </div>
 

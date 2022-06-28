@@ -11,7 +11,7 @@ import { v4 as uuidv4 } from "uuid";
 import { toast } from "react-toastify";
 
 import { useModal } from "hooks/useModal";
-import RequestService from "common/services/request";
+import RequestTransactions from "common/services/RequestTransaction";
 import { useTransactions } from "hooks/useTransactions";
 
 import { ButtonComponent } from "components/Button";
@@ -28,10 +28,10 @@ export function EditModalComponent() {
 
   const [name, setName] = useState(modal.data.data[1].title);
   const [value, setValue] = useState(modal.data.data[1].value);
-  const [select, setSelect] = useState(modal.data.data[1].category);
+  const [select, setSelect] = useState(modal.data.data[1].type);
 
   const modalRef = useRef<any>();
-  const service = new RequestService();
+  const service = new RequestTransactions();
   const { setEditSuccess, editSuccess } = useTransactions();
 
   const closeModal = (event: MouseEvent) => {
@@ -46,6 +46,7 @@ export function EditModalComponent() {
         setModal({ ...modal, edit: false });
       }
     },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [setModal, modal.edit]
   );
 
@@ -62,7 +63,7 @@ export function EditModalComponent() {
       await service.editTransaction(modal.data.data[0], {
         title: name,
         value,
-        category: select,
+        type: select,
         id: uuidv4(),
         date: new Date(),
       });
@@ -77,6 +78,8 @@ export function EditModalComponent() {
       throw new Error("Algo deu errado ao editar a transação");
     }
   };
+
+  const isDisabled = name === "" || value === 0;
 
   return (
     <div
@@ -109,9 +112,9 @@ export function EditModalComponent() {
 
           <div className={styles.gridForm}>
             <InputFieldComponent
-              label="Categoria"
-              htmlFor="category"
-              id="category"
+              label="Tipo"
+              htmlFor="type"
+              id="type"
               placeholder="Selecione"
               required
               value={select}
@@ -130,7 +133,12 @@ export function EditModalComponent() {
             />
           </div>
 
-          <ButtonComponent title="Confirmar" color="primary" type="submit" />
+          <ButtonComponent
+            title="Confirmar"
+            color="primary"
+            type="submit"
+            disabled={isDisabled}
+          />
         </form>
       </AnimationContainerTop>
     </div>

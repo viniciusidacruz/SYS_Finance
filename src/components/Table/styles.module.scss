@@ -88,3 +88,11 @@
     }
   }
 }
+
+.isNegative {
+  color: var(--error) !important;
+}
+
+.isPositive {
+  color: var(--success) !important;
+}

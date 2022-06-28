@@ -18,6 +18,10 @@
   --green-200: #41BFB3;
   --green-300: #2A8C82;
   --green-600: #275950;
+  
+
+  --success: #04BF8A;
+  --error: #F20F38;
 
   --dark: #14140F;
   --shape: #f2f2f2;
@@ -95,4 +99,12 @@ a {
 
 .contentFull {
   height: calc(100vh - 9rem);
+}
+
+.success {
+  color: var(--success);
+}
+
+.error {
+  color: var(--error);
 }

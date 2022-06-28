@@ -4,6 +4,7 @@ import { SessionProvider } from "next-auth/react";
 
 import { AuthProvider } from "contexts/AuthContext";
 import { ModalProvider } from "contexts/ModalContext";
+import { CategoriesProvider } from "contexts/CategoriesContext";
 import { TransactionsProvider } from "contexts/TransactionsContext";
 
 import { HeaderComponent } from "components/Header";
@@ -18,10 +19,12 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
       <AuthProvider>
         <ModalProvider>
           <TransactionsProvider>
-            <ToastContainer />
-            <HeaderComponent />
-            <Component {...pageProps} />
-            <FooterComponent />
+            <CategoriesProvider>
+              <ToastContainer />
+              <HeaderComponent />
+              <Component {...pageProps} />
+              <FooterComponent />
+            </CategoriesProvider>
           </TransactionsProvider>
         </ModalProvider>
       </AuthProvider>

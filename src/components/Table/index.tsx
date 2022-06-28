@@ -22,7 +22,7 @@ export function TableComponent({ data }: IContentProps) {
       return val;
     } else if (
       val[1].title.toLowerCase().includes(search.toLowerCase()) ||
-      val[1].category.toLowerCase().includes(search.toLowerCase())
+      val[1].type.toLowerCase().includes(search.toLowerCase())
     ) {
       return val;
     }
@@ -48,16 +48,18 @@ export function TableComponent({ data }: IContentProps) {
               filteredSearch.map((transaction: any) => {
                 const id = transaction[1].id.split("-", 1);
                 const isNegative =
-                  transaction[1].category === "Saida" ? "negative" : "";
+                  transaction[1].type === "Saida"
+                    ? styles.isNegative
+                    : styles.isPositive;
                 const value = Number(transaction[1].value);
 
                 return (
                   <tr key={transaction[1].id}>
                     <td data-label="ID">{id}</td>
                     <td data-label="Nome">{transaction[1].title}</td>
-                    <td data-label="Tipo">{transaction[1].category}</td>
+                    <td data-label="Tipo">{transaction[1].type}</td>
                     <td data-label="Valor" className={isNegative}>
-                      {transaction[1].category === "Saida" && "- "}
+                      {transaction[1].type === "Saida" && "- "}
                       {formatedCurrency(value)}
                     </td>
                     <td data-label="Criado em">

@@ -3,8 +3,8 @@ import Image from "next/image";
 import { toast } from "react-toastify";
 
 import { useModal } from "hooks/useModal";
-import RequestService from "common/services/request";
 import { useTransactions } from "hooks/useTransactions";
+import RequestTransactions from "common/services/RequestTransaction";
 
 import { ButtonComponent } from "components/Button";
 import { TypographicComponent } from "components/Typographic";
@@ -16,7 +16,7 @@ import { AnimationContainerTop } from "styles/Animated";
 
 export function DeleteModalComponent() {
   const modalRef = useRef<any>();
-  const service = new RequestService();
+  const service = new RequestTransactions();
   const { setEditSuccess, editSuccess } = useTransactions();
   const { modal, handleCloseDelete, setModal } = useModal();
 
@@ -32,6 +32,7 @@ export function DeleteModalComponent() {
         setModal({ ...modal, delete: false });
       }
     },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [setModal, modal.delete]
   );
 

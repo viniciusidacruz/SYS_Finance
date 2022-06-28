@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useMemo, useState, useEffect, createContext } from "react";
 
-import RequestService from "common/services/request";
+import RequestTransactions from "common/services/RequestTransaction";
 
 import { ITransactionsContextProps, ITransactionsProviderProps } from "./types";
 
@@ -16,7 +16,7 @@ export const TransactionsProvider = ({
   const [transactions, setTransactions] = useState({});
   const [editSuccess, setEditSuccess] = useState(false);
 
-  const serviceTransactions = new RequestService();
+  const serviceTransactions = new RequestTransactions();
 
   useEffect(() => {
     const getUserTransactions = () => {
