@@ -1,22 +1,34 @@
 import React, { SyntheticEvent, useState } from "react";
+import Image from "next/image";
 import { v4 as uuidv4 } from "uuid";
 import { toast } from "react-toastify";
 import { useRouter } from "next/router";
 import { GiWallet, GiPayMoney } from "react-icons/gi";
 
+import { useModal } from "hooks/useModal";
 import { useCategories } from "hooks/useCategories";
 import { useTransactions } from "hooks/useTransactions";
+import RequestCategories from "common/services/RequestCategories";
 import RequestTransactions from "common/services/RequestTransaction";
 
 import { ButtonComponent } from "components/Button";
+import { CategoryComponent } from "components/Category";
 import { InputFieldComponent } from "components/InputField";
+import { TypographicComponent } from "components/Typographic";
 import { SelectOptionComponent } from "components/SelectOption";
+
+import edit from "assets/svg/editGray.svg";
 
 import styles from "./styles.module.scss";
 
 export function NewTransactionForm() {
   const [title, setTitle] = useState("");
   const [value, setValue] = useState("");
+  const [categoryOption, setCategoryOption] = useState({
+    id: "",
+    option: "",
+    value: "",
+  });
   const [type, setType] = useState({
     position: 0,
     title: "Entrada",
@@ -25,7 +37,9 @@ export function NewTransactionForm() {
   const router = useRouter();
   const { categories } = useCategories();
   const services = new RequestTransactions();
+  const serviceCategory = new RequestCategories();
   const { editSuccess, setEditSuccess } = useTransactions();
+  const { handleOpenEditCategory: editCategory } = useModal();
 
   const newTransactions = async (event: SyntheticEvent) => {
     event.preventDefault();
@@ -36,6 +50,7 @@ export function NewTransactionForm() {
       id: uuidv4(),
       type: type.title,
       date: new Date(),
+      category: categoryOption.value,
     };
 
     try {
@@ -47,9 +62,28 @@ export function NewTransactionForm() {
     }
   };
 
-  const validator = title === "" || value === "";
+  const handleOpenEditCategory = (category: {}) => {
+    editCategory(category);
+  };
 
-  console.log(categories);
+  const handleDeleteCategory = async (id: string) => {
+    try {
+      setEditSuccess(!editSuccess);
+      toast.success("Excluiu com sucesso!");
+
+      await serviceCategory.deleteCategory(id);
+
+      setCategoryOption({
+        id: "",
+        option: "",
+        value: "",
+      });
+    } catch (error) {
+      throw new Error("Algo deu errado ao editar a transação");
+    }
+  };
+
+  const validator = title === "" || value === "" || categoryOption.value === "";
 
   return (
     <form onSubmit={newTransactions}>
@@ -93,6 +127,48 @@ export function NewTransactionForm() {
           icon={<GiPayMoney size={32} />}
           onClick={() => setType({ title: "Saida", position: 1 })}
         />
+      </div>
+
+      <div className={styles.categories}>
+        <div>
+          <TypographicComponent title="Categorias" variant="h4" />
+          <Image
+            src={edit}
+            alt="Icone para edição de categoria"
+            onClick={() => handleOpenEditCategory(categoryOption)}
+          />
+        </div>
+
+        {Object.values(categories)?.length > 0 ? (
+          <div className={styles.containerCategories}>
+            {Object.entries(categories).map(([key, category]) => {
+              return (
+                <CategoryComponent
+                  key={key}
+                  title={category?.value}
+                  selected={category?.option === categoryOption.option}
+                  onClick={() =>
+                    setCategoryOption({
+                      ...categoryOption,
+                      option: category?.option,
+                      value: category?.value,
+                      id: key,
+                    })
+                  }
+                  deleteCategory={() => handleDeleteCategory(key)}
+                />
+              );
+            })}
+          </div>
+        ) : (
+          <div className={styles.registerCategory}>
+            <TypographicComponent title="Cadastra uma categoria" variant="p" />
+
+            <span onClick={() => router.push("/dashboard/category")}>
+              Clique aqui
+            </span>
+          </div>
+        )}
       </div>
 
       <div className={styles.footerForm}>

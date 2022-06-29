@@ -3,15 +3,20 @@ import Head from "next/head";
 import { parseCookies } from "nookies";
 import { GetServerSideProps } from "next";
 
+import { useModal } from "hooks/useModal";
+
 import { AsideComponent } from "components/Aside";
 import { TypographicComponent } from "components/Typographic";
 import { FooterTableComponent } from "components/FooterTable";
 import { NewTransactionForm } from "components/Forms/NewTransaction";
+import { EditCategoryModalComponent } from "components/Modals/EditCategory";
 
 import styles from "./styles.module.scss";
 import { AnimationContainerRight } from "styles/Animated";
 
 export default function Register() {
+  const { modal } = useModal();
+
   return (
     <Fragment>
       <Head>
@@ -31,6 +36,8 @@ export default function Register() {
           </AnimationContainerRight>
         </div>
       </main>
+
+      {modal.editCategory && <EditCategoryModalComponent />}
     </Fragment>
   );
 }

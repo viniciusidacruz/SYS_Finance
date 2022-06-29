@@ -51,8 +51,8 @@ const Home: NextPage = () => {
           <AnimationContainerRight>
             <Image
               src={hero}
-              width={550}
-              height={500}
+              width={430}
+              height={400}
               alt="Uma imagem ilustrativa de um boneco colocando uma moeda dentro de um cofrinho em formato de porco"
             />
           </AnimationContainerRight>

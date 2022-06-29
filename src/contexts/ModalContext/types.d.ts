@@ -4,13 +4,21 @@ interface ModalContextProps {
   modal: {
     edit: boolean;
     delete: boolean;
+    editCategory: boolean;
     data: any;
   };
-  setModal: ({ edit: boolean, delete: boolean, data: object }) => void;
-  handleOpenEdit: (value: any) => void;
+  setModal: ({
+    edit: boolean,
+    delete: boolean,
+    data: object,
+    editCategory: boolean,
+  }) => void;
+  handleOpenEdit: (value: Record<string, object>) => void;
   handleCloseEdit: () => void;
-  handleOpenDelete: (value: any) => void;
+  handleOpenDelete: (value: Record<string, object>) => void;
   handleCloseDelete: () => void;
+  handleOpenEditCategory: (value: Record<string, object>) => void;
+  handleCloseEditCategory: () => void;
 }
 
 interface ModalProviderProps {

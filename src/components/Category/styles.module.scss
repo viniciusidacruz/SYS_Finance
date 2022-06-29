@@ -1,0 +1,23 @@
+.activeCategory,
+.category {
+  padding: 0.5rem 1rem;
+  border-radius: 1rem;
+  cursor: pointer;
+  position: relative;
+}
+
+.activeCategory {
+  background-color: var(--green-600);
+  color: white;
+}
+
+.category {
+  background-color: var(--grey-200);
+  color: var(--grey-600);
+}
+
+.delete {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+}

@@ -8,18 +8,27 @@ export const ModalProvider = ({ children }: ModalProviderProps) => {
   const [modal, setModal] = useState({
     edit: false,
     delete: false,
+    editCategory: false,
     data: {},
   });
 
   const handleOpenEdit = (data: {}) => {
     setModal({ ...modal, edit: true, data: { ...modal.data, data } });
   };
+
   const handleCloseEdit = () => setModal({ ...modal, edit: false });
 
   const handleOpenDelete = (data: {}) =>
     setModal({ ...modal, delete: true, data: { ...modal.data, data } });
 
   const handleCloseDelete = () => setModal({ ...modal, delete: false });
+
+  const handleOpenEditCategory = (data: {}) => {
+    setModal({ ...modal, editCategory: true, data: { ...modal.data, data } });
+  };
+
+  const handleCloseEditCategory = () =>
+    setModal({ ...modal, editCategory: false });
 
   return (
     <ModalContext.Provider
@@ -30,6 +39,8 @@ export const ModalProvider = ({ children }: ModalProviderProps) => {
         handleCloseEdit,
         handleOpenDelete,
         handleCloseDelete,
+        handleOpenEditCategory,
+        handleCloseEditCategory,
       }}
     >
       {children}

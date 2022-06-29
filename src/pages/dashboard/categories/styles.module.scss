@@ -1,0 +1,26 @@
+.section {
+  width: 78%;
+  height: 100%;
+
+  background-color: var(--light);
+  box-shadow: var(--bs-default);
+
+  border-radius: var(--br-default);
+
+  padding: 1rem;
+
+  & > h1 {
+    text-align: center;
+    text-transform: uppercase;
+
+    font-size: 1rem;
+
+    color: var(--dark);
+  }
+
+  @media (max-width: 768px) {
+    width: 100%;
+
+    margin-top: var(--mg-default);
+  }
+}

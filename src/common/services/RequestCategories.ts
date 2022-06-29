@@ -22,6 +22,10 @@ class RequestCategories {
       throw new Error("Algo deu errado, tenta novamente mais tarde!");
     }
   }
+
+  async deleteCategory(id: string) {
+    await API.delete(`/categories/${id}.json`);
+  }
 }
 
 export default RequestCategories;

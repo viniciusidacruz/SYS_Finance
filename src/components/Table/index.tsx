@@ -34,8 +34,9 @@ export function TableComponent({ data }: IContentProps) {
         <table className={styles.table}>
           <thead>
             <tr>
-              <th>ID</th>
+              <th>Id</th>
               <th>Nome</th>
+              <th>Categoria</th>
               <th>Tipo</th>
               <th>Valor</th>
               <th>Criado em</th>
@@ -55,8 +56,9 @@ export function TableComponent({ data }: IContentProps) {
 
                 return (
                   <tr key={transaction[1].id}>
-                    <td data-label="ID">{id}</td>
+                    <td data-label="Id">{id}</td>
                     <td data-label="Nome">{transaction[1].title}</td>
+                    <td data-label="Categoria">{transaction[1].category}</td>
                     <td data-label="Tipo">{transaction[1].type}</td>
                     <td data-label="Valor" className={isNegative}>
                       {transaction[1].type === "Saida" && "- "}
