@@ -1,0 +1,25 @@
+.container {
+  padding: 1rem;
+  background-color: var(--green-50);
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  span {
+    font-weight: bold;
+    color: var(--grey-600);
+  }
+}
+
+.contentButtons {
+  width: 10%;
+
+  display: flex;
+  justify-content: space-between;
+}
+
+.button {
+  cursor: pointer;
+  margin: 0 1rem;
+}

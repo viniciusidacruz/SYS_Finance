@@ -1,4 +1,4 @@
-import { FormEvent } from "react";
+import { ChangeEvent, FormEvent } from "react";
 
 const maskCpf = (event: FormEvent<HTMLInputElement>) => {
   let value = event.currentTarget.value;
@@ -59,14 +59,13 @@ const maskPhone = (event: FormEvent<HTMLInputElement>) => {
   return event;
 };
 
-const maskCurrency = (event: FormEvent<HTMLInputElement>) => {
-  let value = event.currentTarget.value;
-  value = value.replace(/\D/g, "");
-  value = value.replace(/(\d)(\d{2})$/, "$1,$2");
-  value = value.replace(/(?=(\d{3})+(\D))\B/g, ".");
-  event.currentTarget.value = value;
+const maskCurrency = (event: ChangeEvent<HTMLInputElement>) => {
+  let value = event.target.value;
+  value = value?.replace(/\D/g, "");
+  value = value?.replace(/(\d)(\d{2})$/, "$1,$2");
 
-  return event;
+  event.target.value = value;
+  return event.target.value;
 };
 
 export { maskPhone, maskCurrency, maskCep, maskCpf, maskPis, maskCnpj };

@@ -14,6 +14,7 @@
     text-transform: uppercase;
 
     font-size: 1rem;
+    margin-bottom: 2rem;
 
     color: var(--dark);
   }
@@ -22,5 +23,24 @@
     width: 100%;
 
     margin-top: var(--mg-default);
+  }
+}
+
+.line {
+  margin-bottom: 0.5rem;
+}
+
+.registerCategory {
+  display: flex;
+
+  span {
+    margin-left: 1rem;
+    font-weight: bold;
+    color: var(--green-300);
+    cursor: pointer;
+
+    &:hover {
+      color: var(--green-600);
+    }
   }
 }

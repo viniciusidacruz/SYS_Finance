@@ -46,37 +46,52 @@ export function TableComponent({ data }: IContentProps) {
 
           <tbody>
             {data &&
-              filteredSearch.map((transaction: any) => {
-                const id = transaction[1].id.split("-", 1);
+              filteredSearch.map(([key, transaction]) => {
+                const id = transaction.id.split("-", 1);
                 const isNegative =
-                  transaction[1].type === "Saida"
+                  transaction.type === "Saida"
                     ? styles.isNegative
                     : styles.isPositive;
-                const value = Number(transaction[1].value);
+                const value = Number(transaction.value);
+                const newObject = {
+                  id: key,
+                  uid: transaction.id,
+                  title: transaction.title,
+                  category: transaction.category?.value,
+                  type: transaction.type,
+                  date: transaction.date,
+                  value: transaction.value,
+                };
 
                 return (
-                  <tr key={transaction[1].id}>
+                  <tr key={transaction.id}>
                     <td data-label="Id">{id}</td>
-                    <td data-label="Nome">{transaction[1].title}</td>
-                    <td data-label="Categoria">{transaction[1].category}</td>
-                    <td data-label="Tipo">{transaction[1].type}</td>
+                    <td data-label="Nome">{transaction.title}</td>
+                    <td data-label="Categoria">
+                      {transaction.category ? (
+                        transaction.category.value
+                      ) : (
+                        <span>Nenhum</span>
+                      )}
+                    </td>
+                    <td data-label="Tipo">{transaction.type}</td>
                     <td data-label="Valor" className={isNegative}>
-                      {transaction[1].type === "Saida" && "- "}
+                      {transaction.type === "Saida" && "- "}
                       {formatedCurrency(value)}
                     </td>
                     <td data-label="Criado em">
-                      {formatedDate(transaction[1].date)}
+                      {formatedDate(transaction.date)}
                     </td>
                     <td data-label="Ação">
                       <div className={styles.buttons}>
-                        <button onClick={() => handleOpenEdit(transaction)}>
+                        <button onClick={() => handleOpenEdit(newObject)}>
                           <Image
                             src={edit}
                             alt="Icone representando uma folha sendo escrita pelo um lapis"
                           />
                         </button>
 
-                        <button onClick={() => handleOpenDelete(transaction)}>
+                        <button onClick={() => handleOpenDelete(key)}>
                           <Image
                             src={trash}
                             alt="Icone representando uma cesta de lixo"

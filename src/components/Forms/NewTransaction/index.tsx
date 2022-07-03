@@ -1,4 +1,4 @@
-import React, { SyntheticEvent, useState } from "react";
+import React, { ChangeEvent, SyntheticEvent, useState } from "react";
 import Image from "next/image";
 import { v4 as uuidv4 } from "uuid";
 import { toast } from "react-toastify";
@@ -8,6 +8,7 @@ import { GiWallet, GiPayMoney } from "react-icons/gi";
 import { useModal } from "hooks/useModal";
 import { useCategories } from "hooks/useCategories";
 import { useTransactions } from "hooks/useTransactions";
+import { maskCurrency } from "common/utils/validators/masks";
 import RequestCategories from "common/services/RequestCategories";
 import RequestTransactions from "common/services/RequestTransaction";
 
@@ -39,18 +40,19 @@ export function NewTransactionForm() {
   const services = new RequestTransactions();
   const serviceCategory = new RequestCategories();
   const { editSuccess, setEditSuccess } = useTransactions();
-  const { handleOpenEditCategory: editCategory } = useModal();
 
   const newTransactions = async (event: SyntheticEvent) => {
     event.preventDefault();
 
+    const valueFormated = value.replace(",", ".");
+
     const data = {
       title,
-      value,
+      value: parseFloat(valueFormated),
       id: uuidv4(),
       type: type.title,
       date: new Date(),
-      category: categoryOption.value,
+      category: categoryOption,
     };
 
     try {
@@ -60,10 +62,6 @@ export function NewTransactionForm() {
     } catch (error) {
       toast.error("Ops, tente novamente mais tarde.");
     }
-  };
-
-  const handleOpenEditCategory = (category: {}) => {
-    editCategory(category);
   };
 
   const handleDeleteCategory = async (id: string) => {
@@ -100,9 +98,11 @@ export function NewTransactionForm() {
         />
 
         <InputFieldComponent
-          type="number"
+          type="text"
           value={value}
-          onChange={(event) => setValue(event.target.value)}
+          onChange={(event: ChangeEvent<HTMLInputElement>) =>
+            setValue(maskCurrency(event))
+          }
           required
           label="Valor da transação"
           htmlFor="valueTransaction"
@@ -135,7 +135,7 @@ export function NewTransactionForm() {
           <Image
             src={edit}
             alt="Icone para edição de categoria"
-            onClick={() => handleOpenEditCategory(categoryOption)}
+            onClick={() => router.push("/dashboard/categories")}
           />
         </div>
 
@@ -162,7 +162,10 @@ export function NewTransactionForm() {
           </div>
         ) : (
           <div className={styles.registerCategory}>
-            <TypographicComponent title="Cadastra uma categoria" variant="p" />
+            <TypographicComponent
+              title="Você precisa cadastrar uma categoria"
+              variant="p"
+            />
 
             <span onClick={() => router.push("/dashboard/category")}>
               Clique aqui

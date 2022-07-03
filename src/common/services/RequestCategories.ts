@@ -26,6 +26,10 @@ class RequestCategories {
   async deleteCategory(id: string) {
     await API.delete(`/categories/${id}.json`);
   }
+
+  async editCategory(id: string, value: object) {
+    await API.patch(`/categories/${id}.json`, value);
+  }
 }
 
 export default RequestCategories;

@@ -26,9 +26,9 @@ import { AnimationContainerTop } from "styles/Animated";
 export function EditModalComponent() {
   const { modal, setModal, handleCloseEdit } = useModal();
 
-  const [name, setName] = useState(modal.data.data[1].title);
-  const [value, setValue] = useState(modal.data.data[1].value);
-  const [select, setSelect] = useState(modal.data.data[1].type);
+  const [name, setName] = useState(modal.data.data.title);
+  const [value, setValue] = useState(modal.data.data.value);
+  const [select, setSelect] = useState(modal.data.data.type);
 
   const modalRef = useRef<any>();
   const service = new RequestTransactions();
@@ -60,12 +60,10 @@ export function EditModalComponent() {
     event.preventDefault();
 
     try {
-      await service.editTransaction(modal.data.data[0], {
+      await service.editTransaction(modal.data.data.id, {
         title: name,
         value,
         type: select,
-        id: uuidv4(),
-        date: new Date(),
       });
 
       toast.success("Editado com sucesso!");
@@ -125,7 +123,7 @@ export function EditModalComponent() {
               label="Valor"
               htmlFor="value"
               id="value"
-              type="number"
+              type="text"
               placeholder="0"
               min={0}
               value={value}

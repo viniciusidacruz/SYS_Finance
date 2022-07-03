@@ -18,7 +18,7 @@ class RequestTransactions {
   }
 
   async editTransaction(id: string, value: object) {
-    await API.put(`/transactions/${id}.json`, value);
+    await API.patch(`/transactions/${id}.json`, value);
   }
 
   async deleteTransaction(id: string) {

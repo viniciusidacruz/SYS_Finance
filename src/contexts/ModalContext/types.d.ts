@@ -13,12 +13,18 @@ interface ModalContextProps {
     data: object,
     editCategory: boolean,
   }) => void;
-  handleOpenEdit: (value: Record<string, object>) => void;
+  handleOpenEdit: (value: object) => void;
   handleCloseEdit: () => void;
-  handleOpenDelete: (value: Record<string, object>) => void;
+  handleOpenDelete: (value: {}) => void;
   handleCloseDelete: () => void;
-  handleOpenEditCategory: (value: Record<string, object>) => void;
+  handleOpenEditCategory: (value: EditProps) => void;
   handleCloseEditCategory: () => void;
+}
+
+interface EditProps {
+  id: string;
+  option: string;
+  value: string;
 }
 
 interface ModalProviderProps {

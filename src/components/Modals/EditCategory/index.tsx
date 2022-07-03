@@ -25,7 +25,7 @@ import { AnimationContainerTop } from "styles/Animated";
 export function EditCategoryModalComponent() {
   const { modal, handleCloseEditCategory } = useModal();
 
-  const [name, setName] = useState(modal.data.data.value);
+  const [value, setValue] = useState(modal.data.data.value);
 
   const modalRef = useRef<any>();
   const service = new RequestCategories();
@@ -57,20 +57,20 @@ export function EditCategoryModalComponent() {
     event.preventDefault();
 
     try {
-      await service.deleteCategory(modal.data.data.id);
+      await service.editCategory(modal.data.data.id, { value });
 
       toast.success("Editado com sucesso!");
 
       setTimeout(() => {
         setEditSuccess(!editSuccess);
         handleCloseEditCategory();
-      }, 3000);
+      }, 2000);
     } catch (error) {
       throw new Error("Algo deu errado ao editar a transação");
     }
   };
 
-  const isDisabled = name === "";
+  const isDisabled = value === "";
 
   return (
     <div
@@ -99,8 +99,8 @@ export function EditCategoryModalComponent() {
             htmlFor="category"
             id="category"
             placeholder="Ex: Escritório, Casa, etc..."
-            value={name}
-            onChange={(event) => setName(event.target.value)}
+            value={value}
+            onChange={(event) => setValue(event.target.value)}
             required
           />
 
