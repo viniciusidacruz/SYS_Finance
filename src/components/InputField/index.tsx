@@ -1,4 +1,4 @@
-import React, { FormEvent, useCallback } from "react";
+import React, { ChangeEvent, useCallback } from "react";
 
 import {
   maskCpf,
@@ -19,7 +19,7 @@ export function InputFieldComponent({
   ...rest
 }: IContentInputProps) {
   const handleKeyUp = useCallback(
-    (event: FormEvent<HTMLInputElement>) => {
+    (event: any) => {
       if (mask === "currency") {
         maskCurrency(event);
       } else if (mask === "cep") {
@@ -41,7 +41,7 @@ export function InputFieldComponent({
 
   return (
     <div className={styles.field}>
-      <input {...rest} onKeyUp={handleKeyUp} />
+      <input {...rest} onKeyUp={(event) => handleKeyUp(event)} />
       <label htmlFor={htmlFor}>{label}</label>
       <span className={styles.focusBg}></span>
     </div>
