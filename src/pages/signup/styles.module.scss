@@ -1,25 +1,28 @@
 .content {
-    height: 100%;
-    
+  height: 100%;
+
+  display: flex;
+  justify-content: space-between;
+
+  & > div {
     display: flex;
-    justify-content: space-between;
+    align-items: center;
 
+    width: 100%;
+  }
 
-    & > div {
-        display: flex;
-        align-items: center;
+  & > div:last-child {
+    display: flex;
+    justify-content: flex-end;
+  }
 
-        width: 100%;
+  @media (max-width: 768px) {
+    & > div:first-child {
+      align-items: flex-end;
     }
 
     & > div:last-child {
-        display: flex;
-        justify-content: flex-end;
+      display: none;
     }
-
-    @media (max-width: 768px) {
-        & > div:first-child {
-            display: none;
-        }
-    }
+  }
 }
