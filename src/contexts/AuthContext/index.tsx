@@ -1,9 +1,8 @@
-import { createContext, useState, useEffect } from "react";
-import { setCookie, destroyCookie, parseCookies } from "nookies";
+import { createContext, useState } from "react";
 import { toast } from "react-toastify";
 import { useRouter } from "next/router";
+import { setCookie, destroyCookie, parseCookies } from "nookies";
 import {
-  User,
   getAuth,
   signOut,
   signInWithEmailAndPassword,
@@ -17,17 +16,18 @@ import { AuthContextProps, AuthProviderProps } from "./types";
 export const AuthContext = createContext({} as AuthProviderProps);
 
 export const AuthProvider = ({ children }: AuthContextProps) => {
-  const [isAdmin, setIsAdmin] = useState(false);
-  const [user, setUser] = useState<User | null>(null);
+  const [user, setUser] = useState(() => {
+    const { "@U_Info": user } = parseCookies();
+
+    if (user) {
+      return JSON.parse(user);
+    } else {
+      null;
+    }
+  });
 
   const auth = getAuth(app);
   const router = useRouter();
-
-  useEffect(() => {
-    const { "@U_Info": user } = parseCookies();
-
-    if (user) setUser(JSON.parse(user));
-  }, []);
 
   const signIn = async (email: string, password: string) => {
     if (!email || !password) {
@@ -44,7 +44,7 @@ export const AuthProvider = ({ children }: AuthContextProps) => {
 
           setUser(account.user);
 
-          router.push(`/dashboard/graphic?isAdmin=${isAdmin}`);
+          router.push(`/dashboard/list`);
         }
       })
       .catch((error) => {
@@ -73,16 +73,14 @@ export const AuthProvider = ({ children }: AuthContextProps) => {
   };
 
   const logout = () => {
+    destroyCookie(undefined, "@U_Info");
     signOut(auth);
-    destroyCookie(null, "@U_Info");
 
-    router.push("/signin");
+    router.push("/");
   };
 
   return (
-    <AuthContext.Provider
-      value={{ user, signIn, isAdmin, setIsAdmin, signUp, setUser, logout }}
-    >
+    <AuthContext.Provider value={{ user, signIn, signUp, setUser, logout }}>
       {children}
     </AuthContext.Provider>
   );

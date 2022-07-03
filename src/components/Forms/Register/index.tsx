@@ -11,7 +11,6 @@ import { TypographicComponent } from "components/Typographic";
 import styles from "./styles.module.scss";
 
 export function RegisterComponent() {
-  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -36,16 +35,6 @@ export function RegisterComponent() {
     <div className={styles.container}>
       <form className={styles.content} onSubmit={handleSubmitForm}>
         <TypographicComponent title="Cadastrar" variant="h3" />
-
-        <InputFieldComponent
-          htmlFor="name"
-          label="Usuário"
-          id="name"
-          type="text"
-          required
-          value={name}
-          onChange={(event) => setName(event.target.value)}
-        />
 
         <InputFieldComponent
           htmlFor="email"

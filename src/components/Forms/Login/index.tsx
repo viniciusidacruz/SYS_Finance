@@ -1,6 +1,5 @@
 import { FormEvent, useState } from "react";
 import Link from "next/link";
-import { signIn } from "next-auth/react";
 
 import { useAuth } from "hooks/useAuth";
 
@@ -14,12 +13,12 @@ export function LoginComponent() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const { isAdmin, setIsAdmin, signIn: signInWithFirebase } = useAuth();
+  const { signIn } = useAuth();
 
   const handleSubmitForm = async (event: FormEvent) => {
     event.preventDefault();
 
-    await signInWithFirebase(email, password);
+    await signIn(email, password);
   };
 
   return (
@@ -53,15 +52,6 @@ export function LoginComponent() {
           <Link href="/signup">Não tem uma conta? clique aqui</Link>
         </div>
       </form>
-
-      <div className={styles.access}>
-        <span>Acesse com</span>
-        <ButtonComponent
-          title="Github"
-          style={{ backgroundColor: "#373737", color: "#fff" }}
-          onClick={() => signIn()}
-        />
-      </div>
     </div>
   );
 }

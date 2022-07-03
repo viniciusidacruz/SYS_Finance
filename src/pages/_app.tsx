@@ -1,6 +1,5 @@
 import type { AppProps } from "next/app";
 import { ToastContainer } from "react-toastify";
-import { SessionProvider } from "next-auth/react";
 
 import { AuthProvider } from "contexts/AuthContext";
 import { ModalProvider } from "contexts/ModalContext";
@@ -15,20 +14,18 @@ import "react-toastify/dist/ReactToastify.min.css";
 
 function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
   return (
-    <SessionProvider session={session}>
-      <AuthProvider>
-        <ModalProvider>
-          <TransactionsProvider>
-            <CategoriesProvider>
-              <ToastContainer />
-              <HeaderComponent />
-              <Component {...pageProps} />
-              <FooterComponent />
-            </CategoriesProvider>
-          </TransactionsProvider>
-        </ModalProvider>
-      </AuthProvider>
-    </SessionProvider>
+    <AuthProvider>
+      <ModalProvider>
+        <TransactionsProvider>
+          <CategoriesProvider>
+            <ToastContainer />
+            <HeaderComponent />
+            <Component {...pageProps} />
+            <FooterComponent />
+          </CategoriesProvider>
+        </TransactionsProvider>
+      </ModalProvider>
+    </AuthProvider>
   );
 }
 

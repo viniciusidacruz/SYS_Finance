@@ -1,9 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import { IoMdClose } from "react-icons/io";
-import { useSession, signOut } from "next-auth/react";
-
 import { useAuth } from "hooks/useAuth";
 
 import { LogoComponent } from "../Logo";
@@ -14,38 +11,12 @@ import logoutIcon from "assets/svg/logout.svg";
 
 import { dataNavigation } from "./data";
 import styles from "./styles.module.scss";
-import { useState } from "react";
-import { Drawer } from "./Drawer";
 
 export function HeaderComponent() {
-  const [showMenu, setShowMenu] = useState(false);
-
   const router = useRouter();
-  const session = useSession();
   const { user, logout } = useAuth();
 
-  const isAuthenticated = session.data?.user || user?.uid;
-  const isAuthWithNextAuth = session.data?.user;
-  const isAuthWithFirebase = user?.email;
-  const haveAvatarProfile = isAuthWithNextAuth?.image;
-
-  const nameUser = () => {
-    if (isAuthWithNextAuth) {
-      return <span>{isAuthWithNextAuth.name}</span>;
-    } else if (isAuthWithFirebase) {
-      return <span>{isAuthWithFirebase}</span>;
-    } else {
-      return null;
-    }
-  };
-
-  const loggout = () => {
-    if (isAuthWithNextAuth) {
-      signOut();
-    } else {
-      logout();
-    }
-  };
+  const isAuthenticated = user?.uid;
 
   return (
     <header className={styles.header}>
@@ -64,27 +35,18 @@ export function HeaderComponent() {
 
         {isAuthenticated ? (
           <div className={styles.infoUser}>
-            <span>{nameUser()}</span>
+            <span>{user?.email}</span>
 
             <div className={styles.avatarProfile}>
-              {haveAvatarProfile ? (
-                <Image
-                  src={haveAvatarProfile}
-                  alt="Foto de perfil do usuário"
-                  width={48}
-                  height={48}
-                />
-              ) : (
-                <Image
-                  src={userProfile}
-                  alt="Foto de perfil do usuário"
-                  width={32}
-                  height={32}
-                />
-              )}
+              <Image
+                src={userProfile}
+                alt="Foto de perfil do usuário"
+                width={24}
+                height={24}
+              />
             </div>
 
-            <span className={styles.signOut} onClick={() => loggout()}>
+            <span className={styles.signOut} onClick={logout}>
               <Image src={logoutIcon} alt="Icone em formato de X para fechar" />
             </span>
           </div>
@@ -96,7 +58,6 @@ export function HeaderComponent() {
           />
         )}
       </nav>
-      {showMenu && <Drawer onClose={setShowMenu} />}
     </header>
   );
 }
