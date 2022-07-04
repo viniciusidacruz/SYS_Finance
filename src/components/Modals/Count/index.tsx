@@ -8,8 +8,6 @@ import { useModal } from "hooks/useModal";
 
 import closeIcon from "assets/svg/close.svg";
 
-import ContentModalProps from "./types";
-
 import styles from "./styles.module.scss";
 import { AnimationContainerTop } from "styles/Animated";
 
