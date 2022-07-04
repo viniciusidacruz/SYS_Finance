@@ -1,5 +1,5 @@
 .content {
-  height: 100%;
+  height: calc(100vh - 5rem);
 
   display: flex;
   justify-content: space-between;
@@ -19,10 +19,6 @@
   @media (max-width: 768px) {
     & > div:first-child {
       display: none;
-    }
-
-    & > div:last-child {
-      align-items: flex-end;
     }
   }
 }

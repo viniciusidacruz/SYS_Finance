@@ -15,7 +15,7 @@
 }
 
 .wrapper {
-  max-width: 550px;
+  max-width: 350px;
   width: 100%;
 
   position: relative;
@@ -31,10 +31,11 @@
 
   background-color: var(--light);
 
-  & > p {
+  &>p {
     margin: var(--mg-default) 0;
   }
 }
+
 .close {
   background-color: transparent;
   border: none;
@@ -42,30 +43,4 @@
   position: absolute;
   top: 0.8rem;
   right: 0.8rem;
-}
-
-.form {
-  & > div {
-    margin: 1rem 0;
-  }
-}
-
-.gridForm {
-  display: flex;
-  justify-content: space-between;
-
-  width: 100%;
-
-  & > div {
-    width: 48%;
-  }
-
-  @media (max-width: 768px) {
-    flex-direction: column;
-
-    & > div {
-      width: 100%;
-      margin: 1rem 0;
-    }
-  }
 }

@@ -66,10 +66,10 @@ export function RegisterComponent() {
           onChange={(event) => setConfirmPassword(event.target.value)}
         />
 
+        <ButtonComponent title="Cadastrar" color="primary" type="submit" />
+
         <div className={styles.accessButton}>
           <Link href="/signin">Já tem conta? clique aqui</Link>
-
-          <ButtonComponent title="Cadastrar" color="primary" type="submit" />
         </div>
       </form>
     </div>

@@ -1,11 +1,14 @@
-import { Fragment } from "react";
+import { Fragment, useEffect } from "react";
 import Head from "next/head";
 import Image from "next/image";
 import type { NextPage } from "next";
 import { useRouter } from "next/router";
 
+import { useModal } from "hooks/useModal";
+
 import { ButtonComponent } from "components/Button";
 import { TypographicComponent } from "components/Typographic";
+import { CountModalComponent } from "components/Modals/Count";
 
 import hero from "assets/svg/hero.svg";
 
@@ -17,6 +20,14 @@ import {
 
 const Home: NextPage = () => {
   const router = useRouter();
+  const { modal, handleOpenCount } = useModal();
+
+  useEffect(() => {
+    setTimeout(() => {
+      handleOpenCount();
+    }, 8000);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <Fragment>
@@ -58,6 +69,8 @@ const Home: NextPage = () => {
           </AnimationContainerRight>
         </section>
       </main>
+
+      {modal.count && <CountModalComponent />}
     </Fragment>
   );
 };

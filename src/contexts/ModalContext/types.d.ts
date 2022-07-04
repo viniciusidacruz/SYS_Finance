@@ -5,6 +5,7 @@ interface ModalContextProps {
     edit: boolean;
     delete: boolean;
     editCategory: boolean;
+    count: boolean;
     data: any;
   };
   setModal: ({
@@ -12,19 +13,16 @@ interface ModalContextProps {
     delete: boolean,
     data: object,
     editCategory: boolean,
+    count: boolean,
   }) => void;
-  handleOpenEdit: (value: object) => void;
+  handleOpenCount: () => void;
+  handleCloseCount: () => void;
+  handleOpenEdit: (value: Record<string, object>) => void;
   handleCloseEdit: () => void;
-  handleOpenDelete: (value: {}) => void;
+  handleOpenDelete: (value: Record<string, object>) => void;
   handleCloseDelete: () => void;
-  handleOpenEditCategory: (value: EditProps) => void;
+  handleOpenEditCategory: (value: Record<string, object>) => void;
   handleCloseEditCategory: () => void;
-}
-
-interface EditProps {
-  id: string;
-  option: string;
-  value: string;
 }
 
 interface ModalProviderProps {

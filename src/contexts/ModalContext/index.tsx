@@ -9,6 +9,7 @@ export const ModalProvider = ({ children }: ModalProviderProps) => {
     edit: false,
     delete: false,
     editCategory: false,
+    count: false,
     data: {},
   });
 
@@ -17,6 +18,12 @@ export const ModalProvider = ({ children }: ModalProviderProps) => {
   };
 
   const handleCloseEdit = () => setModal({ ...modal, edit: false });
+
+  const handleOpenCount = () => {
+    setModal({ ...modal, count: true });
+  };
+
+  const handleCloseCount = () => setModal({ ...modal, count: false });
 
   const handleOpenDelete = (data: {}) =>
     setModal({ ...modal, delete: true, data: { ...modal.data, data } });
@@ -36,7 +43,9 @@ export const ModalProvider = ({ children }: ModalProviderProps) => {
         modal,
         setModal,
         handleOpenEdit,
+        handleOpenCount,
         handleCloseEdit,
+        handleCloseCount,
         handleOpenDelete,
         handleCloseDelete,
         handleOpenEditCategory,

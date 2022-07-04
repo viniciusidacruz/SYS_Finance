@@ -52,6 +52,10 @@
             font-size: var(--fs-default-decoration);
         }
     }
+
+    @media (max-width: 768px) {
+      justify-content: center;
+    }
 }
 
 .access {
