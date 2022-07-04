@@ -19,9 +19,9 @@ interface ModalContextProps {
   handleCloseCount: () => void;
   handleOpenEdit: (value: any) => void;
   handleCloseEdit: () => void;
-  handleOpenDelete: (value: Record<string, object>) => void;
+  handleOpenDelete: (value: string) => void;
   handleCloseDelete: () => void;
-  handleOpenEditCategory: (value: Record<string, object>) => void;
+  handleOpenEditCategory: (value: any) => void;
   handleCloseEditCategory: () => void;
 }
 
